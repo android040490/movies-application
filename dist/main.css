@@ -1,0 +1,160 @@
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0; }
+
+p {
+  line-height: 150%; }
+
+a {
+  text-decoration: none; }
+
+.wrapper {
+  max-width: 1000px;
+  min-width: 700px;
+  margin: auto; }
+
+@font-face {
+  font-family: Proxima Nova;
+  src: url(/dist/assets/fonts/ProximaNova-Light-0188899c.ttf);
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: Proxima Nova;
+  src: url(/dist/assets/fonts/ProximaNova-Regular-7ce6760d.ttf);
+  font-weight: 500;
+  font-style: normal; }
+
+@font-face {
+  font-family: Proxima Nova;
+  src: url(/dist/assets/fonts/ProximaNova-Semibold-df8c6264.ttf);
+  font-weight: 700;
+  font-style: normal; }
+
+body {
+  font-family: Proxima Nova;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: #000; }
+
+.page__header {
+  background: #2F4F4F;
+  padding: 20px 0; }
+
+.page__content {
+  background: #F5F5F5; }
+
+.movies-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; }
+  .movies-list__item {
+    padding: 10px 0;
+    width: 450px;
+    flex-basis: 1; }
+
+.movie-preview {
+  background: #fff;
+  box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.3); }
+  .movie-preview__content {
+    display: flex; }
+  .movie-preview__img {
+    line-height: 0%; }
+    .movie-preview__img img {
+      width: 180px; }
+  .movie-preview__title {
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    color: #000; }
+  .movie-preview__description {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    color: #696969; }
+  .movie-preview__overview {
+    padding-top: 20px; }
+  .movie-preview__link {
+    text-decoration: underline;
+    display: block;
+    padding: 9px;
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: #2F4F4F; }
+
+.film-details__header {
+  font-family: Proxima Nova;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  position: relative;
+  overflow: hidden; }
+  .film-details__header-wrapper {
+    background: rgba(50, 100, 150, 0.8);
+    padding: 20px 0; }
+  .film-details__header-content {
+    display: flex;
+    z-index: 30; }
+  .film-details__header-img img {
+    width: 300px; }
+  .film-details__header-description {
+    padding: 20px; }
+
+.film-details__title {
+  font-family: Proxima Nova;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  color: #fff; }
+  .film-details__title span {
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    color: #F0F8FF; }
+
+.film-details__content {
+  display: flex; }
+
+.film-details__actors-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+  .film-details__actors-list-item {
+    padding: 10px; }
+
+.film-details__sidebar {
+  width: 300px;
+  background: #f4f411; }
+
+.actor-card {
+  width: 130px;
+  height: 100%;
+  box-shadow: 2px 2px 6px 2px rgba(50, 50, 50, 0.5);
+  background: #fff;
+  cursor: pointer; }
+  .actor-card__img img {
+    width: 100%; }
+  .actor-card__text {
+    padding: 5px; }
+  .actor-card__name {
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    color: #000; }
+  .actor-card__character {
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #696969; }

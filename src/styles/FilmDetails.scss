@@ -1,0 +1,68 @@
+.film-details{
+    &__header{
+        @include font(16px, #fff, 700);
+        position: relative;
+        overflow: hidden;
+        &-wrapper{
+            background: rgba(50, 100, 150, .8);
+            padding: 20px 0;
+        }
+        &-content{
+            display: flex;
+            z-index: 30;
+        }
+        &-img{
+            img{
+                width: 300px;
+            }
+        }
+        &-description{
+            padding: 20px;
+        }
+    }
+    &__title{
+        @include font(40px, #fff, 700);
+        span{
+            @include font(30px, $font-col4);
+        }
+    }
+    &__content{
+        display: flex;
+    }
+    &__actors-list{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        &-item{
+            padding: 10px;
+        }
+    }
+    &__sidebar{
+        width: 300px;
+        background: #f4f411;
+    }
+}
+
+
+.actor-card{
+    width: 130px;
+    height: 100%;
+    box-shadow: 2px 2px 6px 2px rgba(50, 50, 50, .5);
+    background: #fff;
+    cursor: pointer;
+    &__img{
+        
+        img{
+            width: 100%;
+        }
+    }
+    &__text{
+        padding: 5px;
+    }
+    &__name{
+        @include font(18px, $font-col1)
+    }
+    &__character{
+        @include font(14px, $font-col2)
+    }
+}

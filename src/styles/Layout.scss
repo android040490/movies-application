@@ -1,0 +1,9 @@
+.page{
+    &__header{
+        background: $bg-header;
+        padding: 20px 0;
+    }
+    &__content{
+        background: $bg-content;
+    }
+}
