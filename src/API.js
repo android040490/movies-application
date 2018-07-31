@@ -6,6 +6,10 @@ export const fetchTopRatedFilms = (id) => {
     return axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${id}`)
 };
 
+export const fetchPopularFilms = (id) => {
+    return axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${id}`)
+};
+
 export const fetchFilmById = (id) => {
     return axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`)
 };
@@ -26,10 +30,18 @@ export const fetchActorMovies = (id) => {
     return axios.get(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${API_KEY}&language=en-US`)
 }
 
-export const fetchFilms = (id, path) => {
-    switch (path){
-        case 'top-rated':{
+export const fetchFilms = ( page, id ) => {
+    switch (page){
+
+        case 'top-rated': {
             return fetchTopRatedFilms(id)
         }
+
+        case 'popular' : {
+            return fetchPopularFilms(id)
+        }
+
+        default :
+            return fetchTopRatedFilms(id)
     }
 };

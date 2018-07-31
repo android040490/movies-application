@@ -14,15 +14,15 @@ import {
     SEARCH_FILM
 } from 'redux-store/actionTypes';
 
-export const getFilms = (param, path) =>  dispatch => {
+export const getFilms = (page, pageId, pathName) =>  dispatch => {
     dispatch({ type: FETCH_FILMS_START});
 
-    Api.fetchFilms(param, path)
+    Api.fetchFilms( page, pageId)
         .then((response) => {
             dispatch({      
                 type: FETCH_FILMS_SUCCESS,
                 payload: response.data.results,
-                currentPage: param
+                currentPage: pathName
             });
         })
         .catch((err) => {

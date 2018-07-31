@@ -25,8 +25,10 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Route component={Layout}>
-                <Redirect from='/' to='/top-rated/1'/>
-                <Route path='/top-rated/:id' component={MoviesList}/>
+                <Redirect from='/' to='/films/top-rated/1'/>
+                {/* <Redirect from='/films/:page' to='/films/:page/1'/> */}
+                <Route path='/films/:page/:id' component={MoviesList}/>
+                {/* <Route path='/popular/:id' component={MoviesList}/> */}
                 <Route path='film/:id' component={FilmDetails}/>
                 <Route path='/actor/:id' component={ActorDetails}/>
             </Route>

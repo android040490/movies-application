@@ -1,0 +1,7 @@
+.search-form{
+    padding: 8px 0;
+    input{
+        padding: 5px;
+        @include font(16px, $font-col1)
+    }
+}

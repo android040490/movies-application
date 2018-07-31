@@ -1,3 +1,5 @@
+import R from 'ramda';
+
 export const getDateFromString = (str) => new Date(str).toLocaleString(
     'en-US', {
     year: 'numeric',
@@ -5,3 +7,7 @@ export const getDateFromString = (str) => new Date(str).toLocaleString(
     day: 'numeric'
     }
 )
+
+export const getStringOfFields = (field, list) => {
+    return R.join(', ', R.pluck(field, list));
+};

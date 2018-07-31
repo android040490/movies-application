@@ -40,10 +40,8 @@ class Search extends Component {
     render() {
         return (
             <div className="search-form ">
-                <form className="wrapper" action="">
-                    <div><label htmlFor="search">Search film</label></div>
-                    <input id="search" type="text" onChange={this.handleChange} placeholder="Search"/>
-                </form>
+                <div><label htmlFor="search">Search on page</label></div>
+                <input id="search" type="text" onChange={this.handleChange} placeholder="Search"/>
             </div>
         );
     };

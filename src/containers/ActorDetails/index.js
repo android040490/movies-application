@@ -6,6 +6,8 @@ import {getActorById} from 'redux-store/actions';
 
 import PreviousPageBtn from 'components/PreviousPageBtn';
 import MoviePreview from 'components/MoviePreview';
+import Preloader from 'components/Preloader';
+import ControllPanel from 'components/ControllPanel';
 
 class ActorDetails extends Component {
     constructor(props) {
@@ -39,10 +41,10 @@ class ActorDetails extends Component {
         let {loading, films, actor} = this.props;
         return (
             <div >
-                <div>
+                <ControllPanel>
                     <PreviousPageBtn/>
-                </div>
-                { !loading && Object.keys(actor).length ? this.renderActorDetails(actor, films) : 'Loading' }
+                </ControllPanel>
+                { !loading && Object.keys(actor).length ? this.renderActorDetails(actor, films) : <Preloader/> }
             </div>
         );
     }

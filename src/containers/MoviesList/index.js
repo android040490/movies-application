@@ -8,28 +8,32 @@ import {
     getFilteredFilms,
     getLoading,
     getUrlParamId,
-    getCurrentPage,
-    getCurrentLocation
+    getCurrentPageFromStore,
+    getFullLocationPath,
+    getUrlParamPage
     } from 'redux-store/selectors';
 
 import MoviePreview from 'components/MoviePreview';
 import Pagination from 'components/Pagination';
 import Search from 'components/SearchComponent';
+import Preloader from 'components/Preloader';
+import ControllPanel from 'components/ControllPanel';
 
 
 class MoviesList extends Component {
     componentWillMount() {
-        let {currentPage, pageId} = this.props;
-        if( currentPage != pageId){
-            this.props.getFilms(this.props.pageId, this.props.page)
+        // console.log(this.props.router)
+        let {currentPage, pageId, pathName} = this.props;
+        if( currentPage != pathName){
+            this.props.getFilms( this.props.page, this.props.pageId, this.props.pathName)
         }
         
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.pageId != this.props.pageId){
-            this.props.getFilms(nextProps.pageId, this.props.page)
-        }  
+        if(nextProps.pathName != this.props.pathName){
+            this.props.getFilms( nextProps.page , nextProps.pageId, nextProps.pathName)
+        }
     }
 
     renderFilms (film) {
@@ -44,11 +48,14 @@ class MoviesList extends Component {
         const {films} = this.props;
         
         return (
-            <div>
-                <Search/>
-                <Pagination/>
+            <div >
+                <ControllPanel>
+                    <Search/>
+                    <Pagination/>
+                </ControllPanel>
+                <hr/>
                 <div className="movies-list wrapper">
-                    { this.props.loading ? 'Loading' : this.props.films.map((film) => this.renderFilms(film))}
+                    { this.props.loading ? <Preloader/> : this.props.films.map((film) => this.renderFilms(film))}
                 </div>      
             </div>
                 
@@ -59,9 +66,10 @@ class MoviesList extends Component {
 const mapStateToProps = (state, ownProps) => ({
     films: getFilteredFilms(state),
     loading: getLoading(state),
-    currentPage: getCurrentPage(state),
-    page: getCurrentLocation(ownProps),
-    pageId: getUrlParamId(ownProps)
+    currentPage: getCurrentPageFromStore(state),
+    page: getUrlParamPage(ownProps),
+    pageId: getUrlParamId(ownProps),
+    pathName : getFullLocationPath(ownProps)
 
 })
 

@@ -9,7 +9,6 @@ a {
 
 .wrapper {
   max-width: 1000px;
-  min-width: 700px;
   margin: auto; }
 
 @font-face {
@@ -43,6 +42,14 @@ body {
 
 .page__content {
   background: #F5F5F5; }
+
+.controll-panel {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .controll-panel__item {
+    padding: 10px 0; }
 
 .movies-list {
   display: flex;
@@ -90,6 +97,9 @@ body {
     font-size: 16px;
     color: #2F4F4F; }
 
+.film-page__panel {
+  padding: 15px 0; }
+
 .film-details__header {
   font-family: Proxima Nova;
   font-style: normal;
@@ -103,10 +113,13 @@ body {
     padding: 20px 0; }
   .film-details__header-content {
     display: flex;
-    z-index: 30; }
+    flex-wrap: wrap; }
   .film-details__header-img img {
     width: 300px; }
   .film-details__header-description {
+    flex-shrink: 2;
+    flex-grow: 2;
+    flex-basis: 300px;
     padding: 20px; }
 
 .film-details__title {
@@ -122,19 +135,41 @@ body {
     font-size: 30px;
     color: #F0F8FF; }
 
+.film-details__overview {
+  padding-top: 30px; }
+
 .film-details__content {
   display: flex; }
 
-.film-details__actors-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; }
-  .film-details__actors-list-item {
-    padding: 10px; }
+.film-details__actors-list-title {
+  padding: 15px 0;
+  font-family: Proxima Nova;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 25px;
+  color: #000; }
 
-.film-details__sidebar {
-  width: 300px;
-  background: #f4f411; }
+.film-details__actors-list-items {
+  display: flex;
+  flex-wrap: wrap; }
+
+.film-details__actors-list-item {
+  padding: 10px 10px 10px 0; }
+
+.video-iframe {
+  max-width: 600px; }
+  .video-iframe__video {
+    position: relative;
+    width: 100%;
+    padding-top: 60%; }
+    .video-iframe__video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%; }
 
 .actor-card {
   width: 130px;
@@ -158,3 +193,106 @@ body {
     font-weight: 500;
     font-size: 14px;
     color: #696969; }
+
+.film-sidebar {
+  padding: 10px 8px;
+  background: #F0FFF0;
+  height: 100%; }
+  .film-sidebar__title {
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    color: #000; }
+  .film-sidebar__field {
+    padding: 5px 0;
+    line-height: 150%;
+    color: #696969; }
+    .film-sidebar__field strong {
+      color: #000; }
+
+.nav-btn {
+  position: relative;
+  margin-right: 10px;
+  background: #006400;
+  padding: 8px  12px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background .4s linear;
+  font-family: Proxima Nova;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: #00FF00; }
+
+.nav-btn:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  transition: opacity .3s linear;
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px 2px rgba(50, 50, 50, 0.5); }
+
+.nav-btn:hover {
+  background: #228B22; }
+
+.nav-btn:hover:after {
+  opacity: 0; }
+
+.preloader {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .preloader__title {
+    font-size: 20px;
+    font-weight: 600; }
+  .preloader__load {
+    height: 45px;
+    display: flex;
+    align-items: flex-end; }
+  .preloader__item {
+    display: inline-block;
+    width: 5px;
+    min-height: 7px;
+    margin: 10px 2px;
+    background: #000;
+    animation: zoom .35s linear infinite alternate; }
+  .preloader .item-2 {
+    animation-delay: 0.1s; }
+  .preloader .item-3 {
+    animation-delay: 0.15s; }
+  .preloader .item-4 {
+    animation-delay: 0.2s; }
+  .preloader .item-5 {
+    animation-delay: 0.25s; }
+  .preloader .item-6 {
+    animation-delay: 0.3s; }
+  .preloader .item-7 {
+    animation-delay: 0.35s; }
+  .preloader .item-8 {
+    animation-delay: 0.4s; }
+  .preloader .item-9 {
+    animation-delay: 0.45s; }
+
+@keyframes zoom {
+  0% {
+    min-height: 10px; }
+  100% {
+    min-height: 30px;
+    background: rgba(100, 100, 100, 0.5); } }
+
+.search-form {
+  padding: 8px 0; }
+  .search-form input {
+    padding: 5px;
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: #000; }

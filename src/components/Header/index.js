@@ -1,10 +1,12 @@
 import React from 'react';
 
+import NavigationMenu from 'components/NavigationMenu';
+
 
 const Header = () => {
     return (
         <div className="header wrapper">
-            Header
+            <NavigationMenu/>
         </div>
     );
 };

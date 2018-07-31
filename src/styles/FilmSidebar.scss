@@ -1,0 +1,16 @@
+.film-sidebar{
+    padding: 10px 8px;
+    background: $bg-film-sidebar;
+    height: 100%;
+    &__title{
+        @include font(25px, $font-col1, 700)
+    }
+    &__field{
+        padding: 5px 0;
+        line-height: 150%;
+        color: $font-col2;
+        strong{
+            color: $font-col1;
+        }
+    }
+}

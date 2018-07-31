@@ -8,7 +8,7 @@ export const getFilms = state => {
     return films;
 };
 
-export const getCurrentPage = state => state.filmsPage.currentPage;
+export const getCurrentPageFromStore = state => state.filmsPage.currentPage;
 
 
 export const getSearchString = (state) => state.filmsPage.search.toLowerCase();
@@ -53,8 +53,8 @@ export const getRouter = (props) => props.router;
 
 export const getUrlParamId = (props) => props.router.params.id;
 
-export const getCurrentLocation = (props) => props.location.pathname.split('/')[1];
+export const getUrlParamPage = (props) => props.router.params.page;
 
-export const getStringOfFields = (field, list) => {
-    return R.join(', ', R.pluck(field, list));
-};
+export const getCurrentPath = (props) => props.location.pathname.split('/')[1];
+
+export const getFullLocationPath = (props) => props.location.pathname;
