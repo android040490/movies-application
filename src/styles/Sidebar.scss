@@ -1,7 +1,8 @@
-.film-sidebar{
+.sidebar{
     padding: 10px 8px;
     background: $bg-film-sidebar;
     height: 100%;
+    box-shadow: -2px 2px 4px #000;
     &__title{
         @include font(25px, $font-col1, 700)
     }

@@ -1,0 +1,22 @@
+.header{
+    &__nav-bar{
+
+    }
+}
+
+
+.nav-bar{
+    display: flex;
+    flex-direction: row;
+    &__item{
+        border: 2px solid transparent;
+        border-right-color: $bord-col;
+    }
+    &__item:last-child{
+        border-right-color: transparent;
+    }
+    &__link{
+        padding: 5px 10px;
+        color: $font-col5;
+    }
+}

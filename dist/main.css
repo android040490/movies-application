@@ -1,3 +1,6 @@
+ul, li {
+  list-style: none; }
+
 p, h1, h2, h3, h4, h5, h6 {
   margin: 0; }
 
@@ -56,13 +59,12 @@ body {
   justify-content: space-between;
   flex-wrap: wrap; }
   .movies-list__item {
-    padding: 10px 0;
-    width: 450px;
-    flex-basis: 1; }
+    padding: 10px 0; }
 
 .movie-preview {
   background: #fff;
-  box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.3); }
+  box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.3);
+  width: 450px; }
   .movie-preview__content {
     display: flex; }
   .movie-preview__img {
@@ -97,10 +99,7 @@ body {
     font-size: 16px;
     color: #2F4F4F; }
 
-.film-page__panel {
-  padding: 15px 0; }
-
-.film-details__header {
+.film-page__header {
   font-family: Proxima Nova;
   font-style: normal;
   font-weight: 700;
@@ -108,108 +107,128 @@ body {
   color: #fff;
   position: relative;
   overflow: hidden; }
-  .film-details__header-wrapper {
+  .film-page__header-wrapper {
     background: rgba(50, 100, 150, 0.8);
     padding: 20px 0; }
-  .film-details__header-content {
+  .film-page__header-content {
     display: flex;
     flex-wrap: wrap; }
-  .film-details__header-img img {
+  .film-page__header-img img {
     width: 300px; }
-  .film-details__header-description {
-    flex-shrink: 2;
-    flex-grow: 2;
+  .film-page__header-description {
+    flex-shrink: 1;
+    flex-grow: 1;
     flex-basis: 300px;
     padding: 20px; }
 
-.film-details__title {
+.film-page__title {
   font-family: Proxima Nova;
   font-style: normal;
   font-weight: 700;
   font-size: 40px;
   color: #fff; }
-  .film-details__title span {
+  .film-page__title span {
     font-family: Proxima Nova;
     font-style: normal;
     font-weight: 500;
     font-size: 30px;
     color: #F0F8FF; }
 
-.film-details__overview {
+.film-page__overview {
   padding-top: 30px; }
 
-.film-details__content {
+.film-page__content {
   display: flex; }
-
-.film-details__actors-list-title {
-  padding: 15px 0;
-  font-family: Proxima Nova;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 25px;
-  color: #000; }
-
-.film-details__actors-list-items {
-  display: flex;
-  flex-wrap: wrap; }
-
-.film-details__actors-list-item {
-  padding: 10px 10px 10px 0; }
-
-.video-iframe {
-  max-width: 600px; }
-  .video-iframe__video {
-    position: relative;
-    width: 100%;
-    padding-top: 60%; }
-    .video-iframe__video iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%; }
-
-.actor-card {
-  width: 130px;
-  height: 100%;
-  box-shadow: 2px 2px 6px 2px rgba(50, 50, 50, 0.5);
-  background: #fff;
-  cursor: pointer; }
-  .actor-card__img img {
-    width: 100%; }
-  .actor-card__text {
-    padding: 5px; }
-  .actor-card__name {
-    font-family: Proxima Nova;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    color: #000; }
-  .actor-card__character {
-    font-family: Proxima Nova;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    color: #696969; }
-
-.film-sidebar {
-  padding: 10px 8px;
-  background: #F0FFF0;
-  height: 100%; }
-  .film-sidebar__title {
+  .film-page__content-section-title {
+    padding: 15px 0 15px 15px;
     font-family: Proxima Nova;
     font-style: normal;
     font-weight: 700;
     font-size: 25px;
     color: #000; }
-  .film-sidebar__field {
+
+.film-page__sidebar {
+  flex-basis: 200px;
+  flex-shrink: 0; }
+
+.video-iframe__video {
+  position: relative;
+  max-width: 80%;
+  padding-top: 50%; }
+  .video-iframe__video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%; }
+
+.sidebar {
+  padding: 10px 8px;
+  background: #F0FFF0;
+  height: 100%;
+  box-shadow: -2px 2px 4px #000; }
+  .sidebar__title {
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    color: #000; }
+  .sidebar__field {
     padding: 5px 0;
     line-height: 150%;
     color: #696969; }
-    .film-sidebar__field strong {
+    .sidebar__field strong {
       color: #000; }
+
+.person-page__content {
+  display: flex; }
+
+.person-page__sidebar {
+  flex-basis: 300px;
+  flex-shrink: 0; }
+
+.person-card {
+  display: flex;
+  flex-wrap: wrap; }
+  .person-card__img {
+    flex-shrink: 0;
+    flex-basis: 300px; }
+    .person-card__img img {
+      width: 100%; }
+  .person-card__description {
+    flex-basis: 300px;
+    flex-shrink: 1;
+    flex-grow: 1;
+    padding: 20px; }
+  .person-card__title {
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    color: #000; }
+  .person-card__biography {
+    padding: 20px 0; }
+    .person-card__biography h4 {
+      font-family: Proxima Nova;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      color: #000;
+      padding-bottom: 20px; }
+
+.nav-bar {
+  display: flex;
+  flex-direction: row; }
+  .nav-bar__item {
+    border: 2px solid transparent;
+    border-right-color: #00FF00; }
+  .nav-bar__item:last-child {
+    border-right-color: transparent; }
+  .nav-bar__link {
+    padding: 5px 10px;
+    color: #00FF00; }
 
 .nav-btn {
   position: relative;
@@ -242,6 +261,49 @@ body {
 
 .nav-btn:hover:after {
   opacity: 0; }
+
+.list-cards {
+  display: flex;
+  flex-wrap: wrap; }
+  .list-cards__item {
+    padding: 10px; }
+
+.actor-card-thumbnail {
+  width: 130px;
+  height: 100%;
+  box-shadow: 2px 2px 6px 2px rgba(50, 50, 50, 0.5);
+  background: #fff;
+  cursor: pointer; }
+  .actor-card-thumbnail__img img {
+    width: 100%; }
+  .actor-card-thumbnail__text {
+    padding: 5px; }
+  .actor-card-thumbnail__name {
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    color: #000; }
+  .actor-card-thumbnail__character {
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #696969; }
+
+.film-card-thumbnail {
+  border-radius: 2px;
+  width: 150px;
+  cursor: pointer; }
+  .film-card-thumbnail__img img {
+    width: 100%; }
+  .film-card-thumbnail__title {
+    text-align: center;
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #000; }
 
 .preloader {
   width: 100%;

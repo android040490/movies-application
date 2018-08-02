@@ -11,3 +11,10 @@ export const getDateFromString = (str) => new Date(str).toLocaleString(
 export const getStringOfFields = (field, list) => {
     return R.join(', ', R.pluck(field, list));
 };
+
+export const getSliceIfOverflow = (str, len) => {
+    if (str.length > len) {
+        return R.take(len, str) + '...'
+    }
+    return str
+}

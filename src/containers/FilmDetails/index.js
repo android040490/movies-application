@@ -31,18 +31,18 @@ class Film extends Component {
         const { film, trailerId, actors } = this.props
         console.log(film)
         return (
-            <div className="film-details">
-                <div className="film-details__header" style={{ background: `url(https://image.tmdb.org/t/p/original${film.backdrop_path}) , rgba(200, 100, 100, .8)` }} >
-                    <div className="film-details__header-wrapper">
-                        <div className="film-details__header-content wrapper">
-                            <div className="film-details__header-img">
+            <div className="film-page">
+                <div className="film-page__header" style={{ background: `url(https://image.tmdb.org/t/p/original${film.backdrop_path}) , rgba(200, 100, 100, .8)` }} >
+                    <div className="film-page__header-wrapper">
+                        <div className="film-page__header-content wrapper">
+                            <div className="film-page__header-img">
                                 <img className="" src={` https://image.tmdb.org/t/p/w600_and_h900_bestv2${film.poster_path}`} alt={`${film.title}`} />
                             </div>
-                            <div className="film-details__header-description">
+                            <div className="film-page__header-description">
                                 <div>
-                                    <h3 className='film-details__title'>{film.title} <span>({new Date(film.release_date).getFullYear()})</span></h3>
+                                    <h3 className='film-page__title'>{film.title} <span>({new Date(film.release_date).getFullYear()})</span></h3>
                                 </div>
-                                <div className="film-details__overview">
+                                <div className="film-page__overview">
                                     <h5>Overview:</h5>
                                     <p>{film.overview}</p>
                                 </div>
@@ -50,21 +50,23 @@ class Film extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="film-details__content wrapper">
-                    <div className="film-details__actors-list">
-                        <h3 className="film-details__actors-list-title">Top Billed Cast</h3>
-                        <div className="film-details__actors-list-items">{actors.map(actor => { return <div key={actor.id} className="film-details__actors-list-item"><ActorThumbnail data={actor} /></div> })}</div>
+                <div className="film-page__content wrapper">
+                    <div>
+                        <div className="film-page__content-section">
+                            <h3 className="film-page__content-section-title">Top Billed Cast</h3>
+                            <div className="list-cards">{actors.map(actor => { return <div key={actor.id} className="list-cards__item"><ActorThumbnail data={actor} /></div> })}</div>
+                        </div>
+                        <hr/>
+                        <div className="film-page__content-section">
+                            <h3 className="film-page__content-section-title">Trailer</h3>
+                            <div className="video-iframe__video">
+                                <iframe src={`https://www.youtube.com/embed/${trailerId}`}>
+                                </iframe>
+                            </div>
+                        </div>
                     </div>
-                    <div className="film-details__sidebar">
+                    <div className="film-page__sidebar">
                         <FilmSidebar film={film} />
-                    </div>
-                </div>
-
-                <div className="video-iframe wrapper">
-
-                    <div className="video-iframe__video">
-                        <iframe src={`https://www.youtube.com/embed/${trailerId}`}>
-                        </iframe>
                     </div>
                 </div>
 
@@ -76,13 +78,12 @@ class Film extends Component {
     render() {
         const { film, loading } = this.props;
         return (
-            <div className="film-page">
+            <div>
                 <ControllPanel>
-                    <PreviousPageBtn/>
+                    <PreviousPageBtn />
                 </ControllPanel>
-                
-                <div className="film-page__content">
-                    {!loading && Object.keys(film).length ? this.renderFilm() : <Preloader/>}
+                <div>
+                    {!loading && Object.keys(film).length ? this.renderFilm() : <Preloader />}
                 </div>
             </div>
         );

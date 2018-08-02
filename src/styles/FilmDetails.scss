@@ -1,10 +1,5 @@
-.film-page{
-    &__panel{
-        padding: 15px 0;
-    }
-}
 
-.film-details{
+.film-page{
     &__header{
         @include font(16px, #fff, 700);
         position: relative;
@@ -23,8 +18,8 @@
             }
         }
         &-description{
-            flex-shrink: 2;
-            flex-grow: 2;
+            flex-shrink: 1;
+            flex-grow: 1;
             flex-basis: 300px;
             padding: 20px;
         }
@@ -40,60 +35,29 @@
     }
     &__content{
         display: flex;
-    }
-    &__actors-list{
-        &-title{
-            padding: 15px 0;
-            @include font(25px, $font-col1, 700)
-        }
-        &-items{
-            display: flex;
-            flex-wrap: wrap;
-        }
-        &-item{
-            padding: 10px 10px 10px 0;
+        &-section{
+            &-title{
+                padding: 15px 0 15px 15px;
+                @include font(25px, $font-col1, 700)
+            }
         }
     }
     &__sidebar{
+        flex-basis: 200px;
+        flex-shrink: 0;
     }
     
 }
 
-.video-iframe{
-    max-width: 600px;
-    &__video{
-        position: relative;
+.video-iframe__video{
+    position: relative;
+    max-width: 80%;
+    padding-top: 50%; 
+    iframe{
+        position: absolute;
+        top: 0; left:0; right: 0; bottom: 0;
         width: 100%;
-        padding-top: 60%; 
-        iframe{
-            position: absolute;
-            top: 0; left:0; right: 0; bottom: 0;
-            width: 100%;
-            height: 100%;
-        }
+        height: 100%;
     }
 }
 
-
-.actor-card{
-    width: 130px;
-    height: 100%;
-    box-shadow: 2px 2px 6px 2px rgba(50, 50, 50, .5);
-    background: #fff;
-    cursor: pointer;
-    &__img{
-        
-        img{
-            width: 100%;
-        }
-    }
-    &__text{
-        padding: 5px;
-    }
-    &__name{
-        @include font(18px, $font-col1)
-    }
-    &__character{
-        @include font(14px, $font-col2)
-    }
-}

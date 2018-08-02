@@ -22,7 +22,6 @@ import ControllPanel from 'components/ControllPanel';
 
 class MoviesList extends Component {
     componentWillMount() {
-        // console.log(this.props.router)
         let {currentPage, pageId, pathName} = this.props;
         if( currentPage != pathName){
             this.props.getFilms( this.props.page, this.props.pageId, this.props.pathName)
