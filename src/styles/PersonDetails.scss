@@ -7,7 +7,9 @@
         flex-basis: 300px;
         flex-shrink: 0;
     }
-    &__main-content{}
+    &__main-content{
+        padding-left: 10px;
+    }
 }
 
 .person-card{

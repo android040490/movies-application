@@ -29,7 +29,6 @@ class Film extends Component {
 
     renderFilm() {
         const { film, trailerId, actors } = this.props
-        console.log(film)
         return (
             <div className="film-page">
                 <div className="film-page__header" style={{ background: `url(https://image.tmdb.org/t/p/original${film.backdrop_path}) , rgba(200, 100, 100, .8)` }} >

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import R from 'ramda';
 
-import {getFilms} from 'redux-store/actions';
+import {getFilmsBySearch} from 'redux-store/actions';
 import {
     getFilteredFilms,
     getLoading,
@@ -20,18 +20,16 @@ import Preloader from 'components/Preloader';
 import ControllPanel from 'components/ControllPanel';
 
 
-class MoviesList extends Component {
+class MoviesBySearch extends Component {
     componentWillMount() {
         let {currentPage, pageId, pathName} = this.props;
         if( currentPage != pathName){
             this.props.getFilms( this.props.page, this.props.pageId, this.props.pathName)
         }
-        
     }
 
     componentWillReceiveProps(nextProps){
         if(nextProps.pathName != this.props.pathName){
-            console.log(nextProps )
             this.props.getFilms( nextProps.page , nextProps.pageId, nextProps.pathName)
         }
     }
@@ -64,7 +62,6 @@ class MoviesList extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    films: getFilteredFilms(state),
     loading: getLoading(state),
     currentPage: getCurrentPageFromStore(state),
     page: getUrlParamPage(ownProps),
@@ -74,7 +71,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = { 
-    getFilms
+    getFilmsBySearch
 }
 
-export default connect( mapStateToProps , mapDispatchToProps)(MoviesList);
+export default connect( mapStateToProps , mapDispatchToProps)(MoviesBySearch);

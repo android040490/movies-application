@@ -11,6 +11,9 @@ import {
     FETCH_FILM_BY_ID_FAILURE,
     FETCH_ACTOR_BY_ID_START,
     FETCH_ACTOR_BY_ID_SUCCESS,
+    FETCH_FILMS_BY_SEARCH_START,
+    FETCH_FILMS_BY_SEARCH_SUCCESS,
+    FETCH_FILMS_BY_SEARCH_FAILURE,
     SEARCH_FILM
 } from 'redux-store/actionTypes';
 
@@ -34,6 +37,26 @@ export const getFilms = (page, pageId, pathName) =>  dispatch => {
       });  
 };
 
+export const getFilmsBySearch = (searchString, pageId, pathName) =>  dispatch => {
+    dispatch({ type: FETCH_FILMS_BY_SEARCH_START});
+
+    Api.fetchFilmsBysearch( searchString, pageId)
+        .then((response) => {
+            dispatch({      
+                type: FETCH_FILMS_BY_SEARCH_SUCCESS,
+                payload: response.data.results,
+                currentPage: pathName
+            });
+        })
+        .catch((err) => {
+            dispatch({
+                type: FETCH_FILMS_BY_SEARCH_FAILURE,
+                payload: err,
+                error: true
+                })
+      });  
+};
+
 export const getFilmById = id => async dispatch => {
     dispatch({type: FETCH_FILM_BY_ID_START});
 
@@ -50,24 +73,7 @@ export const getFilmById = id => async dispatch => {
             trailers : trailers,
             actors : actors
         } 
-    });
-
-    // Api.fetchFilmById(id)
-    //     .then((response) => {
-    //         dispatch({      
-    //             type: FETCH_FILM_BY_ID_SUCCESS,
-    //             payload: {
-    //                 details : response.data
-    //             } 
-    //         });
-    //     })
-    //     .catch((err) => {
-    //         dispatch({
-    //             type: FETCH_FILM_BY_ID_FAILURE,
-    //             payload: err,
-    //             error: true
-    //             });
-    //     });
+    })
 };
 
 export const getActorById = (id) => async (dispatch) => {

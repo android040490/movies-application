@@ -45,6 +45,7 @@ class ActorDetails extends Component {
                         <PersonPageSidebar person={actor}/>
                     </div>
                     <div className="person-page__main-content">
+                        <h3>Known for :</h3>
                         <div className="list-cards">
                             {films.map(film => <div key={film.id} className="list-cards__item"><FilmThumbnail film={film} /></div>)}
                         </div>

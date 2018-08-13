@@ -30,6 +30,10 @@ export const fetchActorMovies = (id) => {
     return axios.get(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${API_KEY}&language=en-US`)
 }
 
+export const fetchFilmsBysearch = ( searchString, id) => {
+    return axios.ger(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${searchString}&page=${id}&include_adult=false`)
+}
+
 export const fetchFilms = ( page, id ) => {
     switch (page){
 

@@ -14,6 +14,7 @@ import Layout from 'components/Layout';
 import MoviesList from 'containers/MoviesList';
 import FilmDetails from 'containers/FilmDetails';
 import ActorDetails from 'containers/ActorDetails';
+import MoviesBySearch from 'containers/MoviesBySearch';
 
 const store = createStore(reducers, composeWithDevTools(
     applyMiddleware(thunk)
@@ -26,9 +27,8 @@ ReactDOM.render(
         <Router history={history}>
             <Route component={Layout}>
                 <Redirect from='/' to='/films/top-rated/1'/>
-                {/* <Redirect from='/films/:page' to='/films/:page/1'/> */}
                 <Route path='/films/:page/:id' component={MoviesList}/>
-                {/* <Route path='/popular/:id' component={MoviesList}/> */}
+                <Route path='/films/search/:query/:id' component={MoviesBySearch}/>
                 <Route path='film/:id' component={FilmDetails}/>
                 <Route path='/actor/:id' component={ActorDetails}/>
             </Route>
