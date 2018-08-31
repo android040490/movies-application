@@ -31,6 +31,8 @@ export const getActors = createSelector(
 
 export const getFilmLoading = state => state.filmDetails.loading;
 
+export const getSimilarFilms = state => state.filmDetails.similar;
+
 //actorDetails reducer
 
 export const getActorDetails = (state) => state.actorDetails.details;
@@ -42,6 +44,8 @@ export const getActorLoading = (state) => state.actorDetails.loading;
 //PROPS selectors
 
 export const getRouter = (props) => props.router;
+
+export const getPersonId = (props) => props.router.params.id;
 
 export const getUrlParamId = (props) => queryString.parse(props.location.search).page;
 

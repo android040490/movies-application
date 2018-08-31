@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getUrlParamId, getActorDetails, getActorFilms, getActorLoading } from 'redux-store/selectors';
+import { getPersonId, getActorDetails, getActorFilms, getActorLoading } from 'redux-store/selectors';
 import { getActorById } from 'redux-store/actions';
 import {getSliceIfOverflow} from 'Pipes';
  
@@ -24,8 +24,7 @@ class ActorDetails extends Component {
     }
 
     renderActorDetails(actor, films) {
-        console.log(actor)
-        console.log(films)
+    
         return (
             <div className="person-page wrapper">
                 <div className="person-page__header">
@@ -75,7 +74,7 @@ const mapStateToProps = (state, props) => {
         actor: getActorDetails(state),
         films: getActorFilms(state),
         loading: getActorLoading(state),
-        actorId: getUrlParamId(props)
+        actorId: getPersonId(props)
     }
 }
 

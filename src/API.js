@@ -10,6 +10,18 @@ export const fetchPopularFilms = (id) => {
     return axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${id}`)
 };
 
+export const fetchNowPlayingFilms = (id) => {
+    return axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${id}`)
+}
+
+export const fetchUpcomingFilms = (id) => {
+    return axios.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${id}`)
+}
+
+export const fetchSimilarFilms = (id) => {
+    return axios.get(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}&language=en-US&page=1`)
+}
+
 export const fetchFilmById = (id) => {
     return axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`)
 };
@@ -45,6 +57,13 @@ export const fetchFilms = ( page, id ) => {
             return fetchPopularFilms(id)
         }
 
+        case 'now-in-cinemas' : {
+            return fetchNowPlayingFilms(id)
+        }
+
+        case 'upcoming-in-cinemas' : {
+            return fetchUpcomingFilms(id)
+        }
         default :
             return fetchTopRatedFilms(id)
     }

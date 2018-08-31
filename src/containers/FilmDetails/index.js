@@ -3,13 +3,20 @@ import { connect } from 'react-redux';
 import R from 'ramda';
 
 import { getFilmById } from 'redux-store/actions';
-import { getFilmDetails, getTrailerId, getActors, getFilmLoading } from 'redux-store/selectors';
+import { 
+    getFilmDetails,
+    getTrailerId, 
+    getActors, 
+    getFilmLoading,
+    getSimilarFilms,
+    getFullLocationPath } from 'redux-store/selectors';
 
 import ActorThumbnail from 'components/ActorThumbnail';
 import PreviousPageBtn from 'components/PreviousPageBtn';
 import FilmSidebar from 'components/FilmSidebar';
 import Preloader from 'components/Preloader';
 import ControllPanel from 'components/ControllPanel';
+import SliderCaousel from 'components/SliderCarousel';
 
 class Film extends Component {
     constructor(props) {
@@ -26,10 +33,16 @@ class Film extends Component {
         this.props.getFilmById(this.props.params.id);
     }
 
+    componentWillReceiveProps(nextProps){
+        if ( nextProps.fullPath != this.props.fullPath){
+            this.props.getFilmById(nextProps.params.id);
+        }
+    }
 
     renderFilm() {
-        const { film, trailerId, actors } = this.props
+        const { film, trailerId, actors, similarFilms } = this.props
         return (
+            
             <div className="film-page">
                 <div className="film-page__header" style={{ background: `url(https://image.tmdb.org/t/p/original${film.backdrop_path}) , rgba(200, 100, 100, .8)` }} >
                     <div className="film-page__header-wrapper">
@@ -63,12 +76,17 @@ class Film extends Component {
                                 </iframe>
                             </div>
                         </div>
+                        <hr/>
+                        <div className="film-page__content-section">
+                            <h3 className="film-page__content-section-title">Similar Films</h3>
+                            { similarFilms.length ? <SliderCaousel movies={similarFilms}/> : <div>No similar films</div> }
+                            
+                        </div>
                     </div>
                     <div className="film-page__sidebar">
                         <FilmSidebar film={film} />
                     </div>
                 </div>
-
             </div>
 
         );
@@ -93,11 +111,13 @@ const mapDispatchToProps = {
     getFilmById
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
     film: getFilmDetails(state),
     trailerId: getTrailerId(state),
     actors: getActors(state),
-    loading: getFilmLoading(state)
+    loading: getFilmLoading(state),
+    similarFilms: getSimilarFilms(state),
+    fullPath: getFullLocationPath(ownProps)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Film);

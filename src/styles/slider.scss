@@ -1,0 +1,12 @@
+.carousel{
+    width: 98%;
+    padding: 25px;
+    background: $bg-carousel;
+    &__item{
+        cursor: pointer;
+    }
+    &__item-title{
+        text-align: center;
+        @include font( 18px, #fff, 700);
+    }
+} 

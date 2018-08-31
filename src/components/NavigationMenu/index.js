@@ -10,6 +10,8 @@ const NavigationMenu = () => {
             <li className="nav-bar__item"><div>Films</div>
                 <div className="nav-bar__item-icon"><ReactSVG  src={arrow}/></div>
                 <ul>
+                    <li><Link className="nav-bar__link" to="/films/now-in-cinemas?page=1">Now in cinemas</Link></li>
+                    <li><Link className="nav-bar__link" to="/films/upcoming-in-cinemas?page=1">Upcoming in cinemas</Link></li>
                     <li><Link className="nav-bar__link" to="/films/top-rated?page=1">Top rated</Link></li>
                     <li><Link className="nav-bar__link" to="/films/popular?page=1">Most popular</Link></li>
                 </ul>

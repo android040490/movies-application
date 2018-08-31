@@ -13,7 +13,8 @@ const initialState = {
     actors : {
         ids : [],
         entities : {}
-    }
+    },
+    similar : []
 };
 
 export default (state = initialState, { type, payload}) => {
@@ -38,7 +39,9 @@ export default (state = initialState, { type, payload}) => {
                 actors : {
                     entities : actorsData,
                     ids : actorsIds
-                }});
+                    },
+                similar : payload.similarFilms
+                });
             }
     
         default:

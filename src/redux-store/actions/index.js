@@ -64,13 +64,15 @@ export const getFilmById = id => async dispatch => {
     then(resp => resp.data.results)
     let movieInfo = await Api.fetchFilmById(id).then(resp => resp.data)
     let actors = await Api.fetchFilmActors(id).then(resp => resp.data.cast)
+    let similarFilms = await Api.fetchSimilarFilms(id).then(resp => resp.data.results)
 
     dispatch({
         type: FETCH_FILM_BY_ID_SUCCESS,
         payload: {
             details : movieInfo,
             trailers : trailers,
-            actors : actors
+            actors : actors,
+            similarFilms : similarFilms
         } 
     })
 };
