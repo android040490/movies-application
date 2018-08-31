@@ -1,23 +1,15 @@
 import R from 'ramda';
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
+import queryString from 'query-string';
 
-export const getFilmsById = (state, id) => R.prop(id, state.films);
+export const getFilmsById = (state, id) => R.prop(id, state.filmsPage.entities);
 
-export const getFilms = state => {
+export const getFilmsList = state => {
     const films = R.map(id => getFilmsById(state, id), state.filmsPage.ids);
     return films;
 };
 
 export const getCurrentPageFromStore = state => state.filmsPage.currentPage;
-
-
-export const getSearchString = (state) => state.filmsPage.search.toLowerCase();
-
-
-export const getFilteredFilms =  createSelector( 
-    [getFilms, getSearchString], 
-    ( films, search ) => R.filter( ( item ) => R.contains( search , R.prop('title', item).toLowerCase()), films )
-);
 
 export const getLoading = (state) => state.filmsPage.loading;
 
@@ -51,7 +43,9 @@ export const getActorLoading = (state) => state.actorDetails.loading;
 
 export const getRouter = (props) => props.router;
 
-export const getUrlParamId = (props) => props.router.params.id;
+export const getUrlParamId = (props) => queryString.parse(props.location.search).page;
+
+export const getQueryParamSearch = (props) => queryString.parse(props.location.search).search;
 
 export const getUrlParamPage = (props) => props.router.params.page;
 

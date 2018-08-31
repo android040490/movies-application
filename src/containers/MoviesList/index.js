@@ -3,14 +3,15 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import R from 'ramda';
 
-import {getFilms} from 'redux-store/actions';
+import {getFilms, getFilmsBySearch} from 'redux-store/actions';
 import {
-    getFilteredFilms,
+    getFilmsList,
     getLoading,
     getUrlParamId,
     getCurrentPageFromStore,
     getFullLocationPath,
-    getUrlParamPage
+    getUrlParamPage,
+    getQueryParamSearch
     } from 'redux-store/selectors';
 
 import MoviePreview from 'components/MoviePreview';
@@ -24,15 +25,23 @@ class MoviesList extends Component {
     componentWillMount() {
         let {currentPage, pageId, pathName} = this.props;
         if( currentPage != pathName){
-            this.props.getFilms( this.props.page, this.props.pageId, this.props.pathName)
-        }
-        
+            this.fetchFilms(this.props)
+        } 
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.pathName != this.props.pathName){
-            console.log(nextProps )
-            this.props.getFilms( nextProps.page , nextProps.pageId, nextProps.pathName)
+        let pathNamesEqual = nextProps.pathName != this.props.pathName;
+        let searchParamsEqual = nextProps.location.search != this.props.location.search;
+        if( pathNamesEqual || searchParamsEqual ){
+            this.fetchFilms(nextProps)
+        }
+    }
+
+    fetchFilms(props){
+        if( props.page == 'search'){
+            this.props.getFilmsBySearch( props.search , props.pathName, props.pageId)
+        }else{
+            this.props.getFilms( props.page , props.pageId, props.pathName)
         }
     }
 
@@ -64,17 +73,19 @@ class MoviesList extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    films: getFilteredFilms(state),
+    films: getFilmsList(state),
     loading: getLoading(state),
     currentPage: getCurrentPageFromStore(state),
     page: getUrlParamPage(ownProps),
     pageId: getUrlParamId(ownProps),
-    pathName : getFullLocationPath(ownProps)
+    pathName : getFullLocationPath(ownProps),
+    search : getQueryParamSearch(ownProps)
 
 })
 
 const mapDispatchToProps = { 
-    getFilms
+    getFilms,
+    getFilmsBySearch
 }
 
 export default connect( mapStateToProps , mapDispatchToProps)(MoviesList);

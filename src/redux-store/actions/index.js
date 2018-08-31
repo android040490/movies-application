@@ -13,8 +13,7 @@ import {
     FETCH_ACTOR_BY_ID_SUCCESS,
     FETCH_FILMS_BY_SEARCH_START,
     FETCH_FILMS_BY_SEARCH_SUCCESS,
-    FETCH_FILMS_BY_SEARCH_FAILURE,
-    SEARCH_FILM
+    FETCH_FILMS_BY_SEARCH_FAILURE
 } from 'redux-store/actionTypes';
 
 export const getFilms = (page, pageId, pathName) =>  dispatch => {
@@ -24,7 +23,7 @@ export const getFilms = (page, pageId, pathName) =>  dispatch => {
         .then((response) => {
             dispatch({      
                 type: FETCH_FILMS_SUCCESS,
-                payload: response.data.results,
+                payload: response.data,
                 currentPage: pathName
             });
         })
@@ -37,14 +36,14 @@ export const getFilms = (page, pageId, pathName) =>  dispatch => {
       });  
 };
 
-export const getFilmsBySearch = (searchString, pageId, pathName) =>  dispatch => {
+export const getFilmsBySearch = (searchString, pathName, id) =>  ( dispatch , getState )=> {
     dispatch({ type: FETCH_FILMS_BY_SEARCH_START});
 
-    Api.fetchFilmsBysearch( searchString, pageId)
+    Api.fetchFilmsBysearch( searchString, id )
         .then((response) => {
             dispatch({      
                 type: FETCH_FILMS_BY_SEARCH_SUCCESS,
-                payload: response.data.results,
+                payload: response.data,
                 currentPage: pathName
             });
         })
@@ -89,10 +88,3 @@ export const getActorById = (id) => async (dispatch) => {
         }
     })
 }
-
-export const searchFilm = text => dispatch => {
-    dispatch({
-        type: SEARCH_FILM,
-        payload: text
-    });
-};

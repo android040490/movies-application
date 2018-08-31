@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router';
 
+import queryString from 'query-string';
+
 import {getRouter, getUrlParamId, getUrlParamPage, getCurrentPath} from 'redux-store/selectors';
 
 class Pagination extends Component {
@@ -12,12 +14,15 @@ class Pagination extends Component {
     };
     
     onChangePage(event){
-        let {id, page, path} = this.props;
+        let {id, page, path, location} = this.props;
         id = +id;
         let index = +event.target.getAttribute('data');
         if (!(id == 1 && index == -1)){
             id += index;
-            this.props.history.push(`/${path}/${page}/${id}` )    
+            let search = queryString.parse( location.search );
+            search.page = id;
+            let newSearch = queryString.stringify(search);
+            this.props.history.push(`/${path}/${page}?${newSearch}` )    
         };
     };
 
