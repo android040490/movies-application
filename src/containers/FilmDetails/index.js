@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import R from 'ramda';
+import { Parallax } from 'react-parallax';
 
 import { getFilmById } from 'redux-store/actions';
-import { 
+import {
     getFilmDetails,
-    getTrailerId, 
-    getActors, 
+    getTrailerId,
+    getActors,
     getFilmLoading,
     getSimilarFilms,
-    getFullLocationPath } from 'redux-store/selectors';
+    getFullLocationPath
+} from 'redux-store/selectors';
 
 import ActorThumbnail from 'components/ActorThumbnail';
 import PreviousPageBtn from 'components/PreviousPageBtn';
@@ -33,8 +34,8 @@ class Film extends Component {
         this.props.getFilmById(this.props.params.id);
     }
 
-    componentWillReceiveProps(nextProps){
-        if ( nextProps.fullPath != this.props.fullPath){
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.fullPath != this.props.fullPath) {
             this.props.getFilmById(nextProps.params.id);
         }
     }
@@ -42,33 +43,36 @@ class Film extends Component {
     renderFilm() {
         const { film, trailerId, actors, similarFilms } = this.props
         return (
-            
+
             <div className="film-page">
-                <div className="film-page__header" style={{ background: `url(https://image.tmdb.org/t/p/original${film.backdrop_path}) , rgba(200, 100, 100, .8)` }} >
-                    <div className="film-page__header-wrapper">
-                        <div className="film-page__header-content wrapper">
-                            <div className="film-page__header-img">
-                                <img className="" src={` https://image.tmdb.org/t/p/w600_and_h900_bestv2${film.poster_path}`} alt={`${film.title}`} />
-                            </div>
-                            <div className="film-page__header-description">
-                                <div>
-                                    <h3 className='film-page__title'>{film.title} <span>({new Date(film.release_date).getFullYear()})</span></h3>
+                <Parallax bgImage={`https://image.tmdb.org/t/p/original${film.backdrop_path}`}
+                    strength={400}>
+                    <div className="film-page__header"  >
+                        <div className="film-page__header-wrapper">
+                            <div className="film-page__header-content wrapper">
+                                <div className="film-page__header-img">
+                                    <img className="" src={` https://image.tmdb.org/t/p/w600_and_h900_bestv2${film.poster_path}`} alt={`${film.title}`} />
                                 </div>
-                                <div className="film-page__overview">
-                                    <h5>Overview:</h5>
-                                    <p>{film.overview}</p>
+                                <div className="film-page__header-description">
+                                    <div>
+                                        <h3 className='film-page__title'>{film.title} <span>({new Date(film.release_date).getFullYear()})</span></h3>
+                                    </div>
+                                    <div className="film-page__overview">
+                                        <h5>Overview:</h5>
+                                        <p>{film.overview}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </Parallax>
                 <div className="film-page__content wrapper">
                     <div>
                         <div className="film-page__content-section">
                             <h3 className="film-page__content-section-title">Top Billed Cast</h3>
                             <div className="list-cards">{actors.map(actor => { return <div key={actor.id} className="list-cards__item"><ActorThumbnail data={actor} /></div> })}</div>
                         </div>
-                        <hr/>
+                        <hr />
                         <div className="film-page__content-section">
                             <h3 className="film-page__content-section-title">Trailer</h3>
                             <div className="video-iframe__video">
@@ -76,11 +80,11 @@ class Film extends Component {
                                 </iframe>
                             </div>
                         </div>
-                        <hr/>
+                        <hr />
                         <div className="film-page__content-section">
                             <h3 className="film-page__content-section-title">Similar Films</h3>
-                            { similarFilms.length ? <SliderCaousel movies={similarFilms}/> : <div>No similar films</div> }
-                            
+                            {similarFilms.length ? <SliderCaousel movies={similarFilms} /> : <div>No similar films</div>}
+
                         </div>
                     </div>
                     <div className="film-page__sidebar">

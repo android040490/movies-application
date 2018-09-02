@@ -1,12 +1,25 @@
 .carousel{
     width: 98%;
-    padding: 25px;
+    padding: 15px 25px 25px;
     background: $bg-carousel;
     &__item{
         cursor: pointer;
     }
+    &__item-img{
+        border: 2px solid #fff;
+    }
     &__item-title{
         text-align: center;
         @include font( 18px, #fff, 700);
+    }
+
+    .slick-dots li button:before{
+        opacity: 1;
+        color: #fff;
+        font-size: 8px;
+    }
+    .slick-dots li.slick-active button:before{
+        color: #000;
+        font-size: 16px;
     }
 } 

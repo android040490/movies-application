@@ -9,7 +9,6 @@ class MoviePreview extends Component {
 
     render() {
         const { film } = this.props;
-        // console.log(film)
         const shortDescription = `${R.take(150, film.overview)}...`
         return (
             <div className='movie-preview'>
@@ -19,8 +18,8 @@ class MoviePreview extends Component {
                     </div>
                     <div className="movie-preview__description">
                         <div>
-                            <h3 className='movie-preview__title'>{film.title}</h3>
-                            <p className="movie-preview__releast-date">{getDateFromString(film.release_date)}</p>
+                            <h3 className='movie-preview__title'>{film.title || film.name}</h3>
+                            <p className="movie-preview__releast-date">{getDateFromString(film.release_date || film.first_air_date)}</p>
                             <p className='movie-preview__overview'>{shortDescription}</p>
                         </div>
                         <div>

@@ -10,6 +10,10 @@ export const fetchPopularFilms = (id) => {
     return axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${id}`)
 };
 
+export const fetchPopularSeries = (id) => {
+    return axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=${id}`)
+}
+
 export const fetchNowPlayingFilms = (id) => {
     return axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${id}`)
 }
@@ -63,6 +67,10 @@ export const fetchFilms = ( page, id ) => {
 
         case 'upcoming-in-cinemas' : {
             return fetchUpcomingFilms(id)
+        }
+
+        case 'popular-series' : {
+            return fetchPopularSeries(id)
         }
         default :
             return fetchTopRatedFilms(id)

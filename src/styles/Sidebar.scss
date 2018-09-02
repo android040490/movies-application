@@ -4,14 +4,14 @@
     height: 100%;
     box-shadow: -2px 2px 4px #000;
     &__title{
-        @include font(25px, $font-col1, 700)
+        @include font(25px, $font-col6, 700)
     }
     &__field{
         padding: 5px 0;
         line-height: 150%;
-        color: $font-col2;
+        color: #fff;
         strong{
-            color: $font-col1;
+            color: $font-col7;
         }
     }
 }

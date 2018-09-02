@@ -27,6 +27,7 @@ ReactDOM.render(
             <Route component={Layout}>
                 <Redirect from='/' to='/films/top-rated?page=1'/>
                 <Route path='/films/:page' component={MoviesList}/>
+                <Route path='/tv-series/:page' component={MoviesList}/>
                 <Route path='/film/:id' component={FilmDetails}/>
                 <Route path='/actor/:id' component={ActorDetails}/>
             </Route>

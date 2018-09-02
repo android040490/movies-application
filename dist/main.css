@@ -437,6 +437,7 @@ body {
   font-weight: 700;
   font-size: 16px;
   color: #fff;
+  height: 100%;
   position: relative;
   overflow: hidden; }
   .film-page__header-wrapper {
@@ -498,7 +499,7 @@ body {
 
 .sidebar {
   padding: 10px 8px;
-  background: #F0FFF0;
+  background: #014721;
   height: 100%;
   box-shadow: -2px 2px 4px #000; }
   .sidebar__title {
@@ -506,13 +507,13 @@ body {
     font-style: normal;
     font-weight: 700;
     font-size: 25px;
-    color: #000; }
+    color: #a5e60e; }
   .sidebar__field {
     padding: 5px 0;
     line-height: 150%;
-    color: #696969; }
+    color: #fff; }
     .sidebar__field strong {
-      color: #000; }
+      color: #c5c2c2; }
 
 .person-page__content {
   display: flex; }
@@ -571,13 +572,18 @@ body {
       max-height: 0;
       overflow: hidden;
       padding: 0;
-      background: #054ca8;
       border-radius: 5px;
       transition: all .3s ease-in-out;
       z-index: 3; }
       .nav-bar__item ul li {
+        background: #054ca8;
         padding: 10px 15px;
-        border-bottom: 1px solid #fff; }
+        border-bottom: 1px solid #fff;
+        transition: all .3s linear; }
+      .nav-bar__item ul li:hover {
+        background: #fff; }
+        .nav-bar__item ul li:hover a {
+          color: #054ca8; }
     .nav-bar__item-icon {
       fill: #00FF00;
       transition: all .3s linear;
@@ -601,7 +607,8 @@ body {
     border-right-color: transparent; }
   .nav-bar__link {
     color: #F0F8FF;
-    font-weight: 700; }
+    font-weight: 700;
+    transition: color .3s linear; }
 
 .nav-btn {
   position: relative;
@@ -736,10 +743,12 @@ body {
 
 .carousel {
   width: 98%;
-  padding: 25px;
-  background: #5d8be0; }
+  padding: 15px 25px 25px;
+  background: #073c9e; }
   .carousel__item {
     cursor: pointer; }
+  .carousel__item-img {
+    border: 2px solid #fff; }
   .carousel__item-title {
     text-align: center;
     font-family: Proxima Nova, sans-serif;
@@ -747,3 +756,10 @@ body {
     font-weight: 700;
     font-size: 18px;
     color: #fff; }
+  .carousel .slick-dots li button:before {
+    opacity: 1;
+    color: #fff;
+    font-size: 8px; }
+  .carousel .slick-dots li.slick-active button:before {
+    color: #000;
+    font-size: 16px; }
