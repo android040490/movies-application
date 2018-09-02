@@ -16,12 +16,12 @@ const NavigationMenu = () => {
                     <li><Link className="nav-bar__link" to="/films/popular?page=1">Most popular</Link></li>
                 </ul>
             </li>
-            {/* <li className="nav-bar__item"><div>TV series</div>
+            <li className="nav-bar__item"><div>TV series</div>
                 <div className="nav-bar__item-icon"><ReactSVG  src={arrow}/></div>
                 <ul>
                     <li><Link className="nav-bar__link" to="/tv-series/popular-series?page=1">Most popular</Link></li>
                 </ul>
-            </li> */}
+            </li>
             <li className="nav-bar__item">Actors</li>
         </ul>
     );

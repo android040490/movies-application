@@ -26,9 +26,9 @@ class ActorDetails extends Component {
     renderActorDetails(actor, films) {
     
         return (
-            <div className="person-page wrapper">
+            <div className="person-page">
                 <div className="person-page__header">
-                    <div className="person-card">
+                    <div className="person-card wrapper">
                         <div className="person-card__img"><img src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${actor.profile_path}`} alt={actor.name} /></div>
                         <div className="person-card__description">
                             <h2 className="person-card__title">{actor.name}</h2>
@@ -39,7 +39,7 @@ class ActorDetails extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="person-page__content">
+                <div className="person-page__content wrapper">
                     <div className="person-page__sidebar">
                         <PersonPageSidebar person={actor}/>
                     </div>

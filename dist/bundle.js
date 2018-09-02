@@ -52386,6 +52386,33 @@ var NavigationMenu = function NavigationMenu() {
         _react2.default.createElement(
             'li',
             { className: 'nav-bar__item' },
+            _react2.default.createElement(
+                'div',
+                null,
+                'TV series'
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'nav-bar__item-icon' },
+                _react2.default.createElement(_reactSvg2.default, { src: _baselineKeyboard_arrow_down24px2.default })
+            ),
+            _react2.default.createElement(
+                'ul',
+                null,
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { className: 'nav-bar__link', to: '/tv-series/popular-series?page=1' },
+                        'Most popular'
+                    )
+                )
+            )
+        ),
+        _react2.default.createElement(
+            'li',
+            { className: 'nav-bar__item' },
             'Actors'
         )
     );
@@ -62200,13 +62227,13 @@ var ActorDetails = function (_Component) {
 
             return _react2.default.createElement(
                 'div',
-                { className: 'person-page wrapper' },
+                { className: 'person-page' },
                 _react2.default.createElement(
                     'div',
                     { className: 'person-page__header' },
                     _react2.default.createElement(
                         'div',
-                        { className: 'person-card' },
+                        { className: 'person-card wrapper' },
                         _react2.default.createElement(
                             'div',
                             { className: 'person-card__img' },
@@ -62239,7 +62266,7 @@ var ActorDetails = function (_Component) {
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: 'person-page__content' },
+                    { className: 'person-page__content wrapper' },
                     _react2.default.createElement(
                         'div',
                         { className: 'person-page__sidebar' },

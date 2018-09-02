@@ -515,6 +515,10 @@ body {
     .sidebar__field strong {
       color: #c5c2c2; }
 
+.person-page__header {
+  background: #0353cc;
+  padding: 20px; }
+
 .person-page__content {
   display: flex; }
 
@@ -527,12 +531,16 @@ body {
 
 .person-card {
   display: flex;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  color: #fff; }
   .person-card__img {
     flex-shrink: 0;
     flex-basis: 300px; }
     .person-card__img img {
-      width: 100%; }
+      width: 100%;
+      border: 2px solid #fff;
+      border-radius: 5px;
+      box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.2); }
   .person-card__description {
     flex-basis: 300px;
     flex-shrink: 1;
@@ -543,7 +551,7 @@ body {
     font-style: normal;
     font-weight: 700;
     font-size: 30px;
-    color: #000; }
+    color: #fff; }
   .person-card__biography {
     padding: 20px 0; }
     .person-card__biography h4 {
@@ -551,7 +559,7 @@ body {
       font-style: normal;
       font-weight: 700;
       font-size: 20px;
-      color: #000;
+      color: #fff;
       padding-bottom: 20px; }
 
 .nav-bar {
@@ -653,7 +661,8 @@ body {
   height: 100%;
   box-shadow: 2px 2px 6px 2px rgba(50, 50, 50, 0.5);
   background: #fff;
-  cursor: pointer; }
+  cursor: pointer;
+  transition: all .3s linear; }
   .actor-card-thumbnail__img img {
     width: 100%; }
   .actor-card-thumbnail__text {
@@ -671,19 +680,29 @@ body {
     font-size: 14px;
     color: #696969; }
 
+.actor-card-thumbnail:hover {
+  transform: scale(1.1); }
+
 .film-card-thumbnail {
   border-radius: 2px;
   width: 150px;
-  cursor: pointer; }
+  cursor: pointer;
+  transition: all .3s linear; }
   .film-card-thumbnail__img img {
     width: 100%; }
   .film-card-thumbnail__title {
     text-align: center;
     font-family: Proxima Nova, sans-serif;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 14px;
-    color: #000; }
+    color: #000;
+    transition: color .3s linear; }
+
+.film-card-thumbnail:hover {
+  transform: scale(1.1); }
+  .film-card-thumbnail:hover .film-card-thumbnail__title {
+    color: #696969; }
 
 .preloader {
   width: 100%;
@@ -748,6 +767,7 @@ body {
   .carousel__item {
     cursor: pointer; }
   .carousel__item-img {
+    position: relative;
     border: 2px solid #fff; }
   .carousel__item-title {
     text-align: center;
@@ -756,6 +776,22 @@ body {
     font-weight: 700;
     font-size: 18px;
     color: #fff; }
+  .carousel__item:hover .carousel__item-img::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: 'View';
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    background: rgba(0, 0, 0, 0.5); }
+  .carousel__item:hover .carousel__item-title {
+    color: #0bee56; }
   .carousel .slick-dots li button:before {
     opacity: 1;
     color: #fff;

@@ -6,11 +6,30 @@
         cursor: pointer;
     }
     &__item-img{
+        position: relative;
         border: 2px solid #fff;
     }
     &__item-title{
         text-align: center;
         @include font( 18px, #fff, 700);
+    }
+
+    &__item:hover{
+        .carousel__item-img::after{
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            content: 'View';
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            background: rgba(0, 0, 0, .5);
+        }
+        .carousel__item-title{
+            color: rgb(11, 238, 86);
+        }
     }
 
     .slick-dots li button:before{
