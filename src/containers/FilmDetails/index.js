@@ -9,7 +9,10 @@ import {
     getActors,
     getFilmLoading,
     getSimilarFilms,
-    getFullLocationPath
+    getFullLocationPath,
+    getQueryParamMovieId,
+    getQueryParamCategory
+
 } from 'redux-store/selectors';
 
 import ActorThumbnail from 'components/ActorThumbnail';
@@ -31,12 +34,13 @@ class Film extends Component {
     }
 
     componentDidMount() {
-        this.props.getFilmById(this.props.params.id);
+        console.log(this.props)
+        this.props.getFilmById( this.props.movieCategory, this.props.movieId);
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.fullPath != this.props.fullPath) {
-            this.props.getFilmById(nextProps.params.id);
+        if (nextProps.movieId != this.props.movieId) {
+            this.props.getFilmById( nextProps.movieCategory, nextProps.movieId);
         }
     }
 
@@ -47,7 +51,7 @@ class Film extends Component {
             <div className="film-page">
                 <Parallax bgImage={`https://image.tmdb.org/t/p/original${film.backdrop_path}`}
                     strength={400}>
-                    <div className="film-page__header"  >
+                    <div className="film-page__header">
                         <div className="film-page__header-wrapper">
                             <div className="film-page__header-content wrapper">
                                 <div className="film-page__header-img">
@@ -55,7 +59,7 @@ class Film extends Component {
                                 </div>
                                 <div className="film-page__header-description">
                                     <div>
-                                        <h3 className='film-page__title'>{film.title} <span>({new Date(film.release_date).getFullYear()})</span></h3>
+                                        <h3 className='film-page__title'>{film.title || film.name} <span>({new Date(film.release_date || film.first_air_date).getFullYear()})</span></h3>
                                     </div>
                                     <div className="film-page__overview">
                                         <h5>Overview:</h5>
@@ -121,7 +125,9 @@ const mapStateToProps = (state, ownProps) => ({
     actors: getActors(state),
     loading: getFilmLoading(state),
     similarFilms: getSimilarFilms(state),
-    fullPath: getFullLocationPath(ownProps)
+    fullPath: getFullLocationPath(ownProps),
+    movieId: getQueryParamMovieId(ownProps),
+    movieCategory: getQueryParamCategory(ownProps)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Film);

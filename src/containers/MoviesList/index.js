@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
-import R from 'ramda';
 
 import {getFilms, getFilmsBySearch} from 'redux-store/actions';
 import {
@@ -11,7 +9,8 @@ import {
     getCurrentPageFromStore,
     getFullLocationPath,
     getUrlParamPage,
-    getQueryParamSearch
+    getQueryParamSearch,
+    getUrlParamMoviesType
     } from 'redux-store/selectors';
 
 import MoviePreview from 'components/MoviePreview';
@@ -23,7 +22,8 @@ import ControllPanel from 'components/ControllPanel';
 
 class MoviesList extends Component {
     componentWillMount() {
-        let {currentPage, pageId, pathName} = this.props;
+        console.log(this.props)
+        let {currentPage, pathName} = this.props;
         if( currentPage != pathName){
             this.fetchFilms(this.props)
         } 
@@ -39,16 +39,16 @@ class MoviesList extends Component {
 
     fetchFilms(props){
         if( props.page == 'search'){
-            this.props.getFilmsBySearch( props.search , props.pathName, props.pageId)
+            this.props.getFilmsBySearch( props.search , props.pathName, props.pageId )
         }else{
-            this.props.getFilms( props.page , props.pageId, props.pathName)
+            this.props.getFilms( props.moviesType, props.page , props.pathName, props.pageId)
         }
     }
 
     renderFilms (film) {
         return (
             <div key={film.id}  className="movies-list__item">
-                <MoviePreview  film={film}/>
+                <MoviePreview type={this.props.moviesType}  film={film}/>
             </div>
         )
     }
@@ -79,7 +79,8 @@ const mapStateToProps = (state, ownProps) => ({
     page: getUrlParamPage(ownProps),
     pageId: getUrlParamId(ownProps),
     pathName : getFullLocationPath(ownProps),
-    search : getQueryParamSearch(ownProps)
+    search : getQueryParamSearch(ownProps),
+    moviesType : getUrlParamMoviesType(ownProps)
 
 })
 

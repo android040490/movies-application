@@ -16,10 +16,10 @@ import {
     FETCH_FILMS_BY_SEARCH_FAILURE
 } from 'redux-store/actionTypes';
 
-export const getFilms = (page, pageId, pathName) =>  dispatch => {
+export const getFilms = (moviesType, page, pathName,  pageId) =>  dispatch => {
     dispatch({ type: FETCH_FILMS_START});
 
-    Api.fetchFilms( page, pageId)
+    Api.fetchMovies[moviesType][page]( pageId )
         .then((response) => {
             dispatch({      
                 type: FETCH_FILMS_SUCCESS,
@@ -56,15 +56,15 @@ export const getFilmsBySearch = (searchString, pathName, id) =>  ( dispatch , ge
       });  
 };
 
-export const getFilmById = id => async dispatch => {
+export const getFilmById = ( category, id )=> async dispatch => {
     dispatch({type: FETCH_FILM_BY_ID_START});
 
     
-    let trailers = await Api.fetchFilmTrailer(id).
+    let trailers = await Api.fetchInfoAboutMovie.trailers[category](id).
     then(resp => resp.data.results)
-    let movieInfo = await Api.fetchFilmById(id).then(resp => resp.data)
-    let actors = await Api.fetchFilmActors(id).then(resp => resp.data.cast)
-    let similarFilms = await Api.fetchSimilarFilms(id).then(resp => resp.data.results)
+    let movieInfo = await Api.fetchInfoAboutMovie.movieInfo[category](id).then(resp => resp.data)
+    let actors = await Api.fetchInfoAboutMovie.people[category](id).then(resp => resp.data.cast)
+    let similarFilms = await Api.fetchInfoAboutMovie.similarMovies[category](id).then(resp => resp.data.results)
 
     dispatch({
         type: FETCH_FILM_BY_ID_SUCCESS,

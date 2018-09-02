@@ -15,7 +15,7 @@ class Search extends Component {
     search = this.debounce(this.changeLocation , 800);
 
     changeLocation(query){
-        this.props.router.push(`/films/search?search=${query}&page=1`)
+        this.props.router.push(`/movies/films/search?search=${query}&page=1`)
     }
 
     handleChange(event){

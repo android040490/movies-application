@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 
 import queryString from 'query-string';
 
-import {getRouter, getUrlParamId, getUrlParamPage, getCurrentPath} from 'redux-store/selectors';
+import {getRouter, getUrlParamId, getUrlParamPage, getCurrentPath, getFullLocationPath} from 'redux-store/selectors';
 
 class Pagination extends Component {
     constructor(props){
@@ -22,7 +22,7 @@ class Pagination extends Component {
             let search = queryString.parse( location.search );
             search.page = id;
             let newSearch = queryString.stringify(search);
-            this.props.history.push(`/${path}/${page}?${newSearch}` )    
+            this.props.history.push(`${path}?${newSearch}` )    
         };
     };
 
@@ -40,7 +40,7 @@ const mapStateToProps = (state, props) =>({
     id: getUrlParamId(props),
     history : getRouter(props),
     page: getUrlParamPage(props),
-    path: getCurrentPath(props)
+    path: getFullLocationPath(props)
 });
 
 

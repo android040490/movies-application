@@ -25,10 +25,10 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Route component={Layout}>
-                <Redirect from='/' to='/films/top-rated?page=1'/>
-                <Route path='/films/:page' component={MoviesList}/>
-                <Route path='/tv-series/:page' component={MoviesList}/>
-                <Route path='/film/:id' component={FilmDetails}/>
+                <Redirect from='/' to='/movies/films/top-rated' query={{'page' : 1}}/>
+                <Route path='/movies/:type/:page' component={MoviesList}/>
+                {/* <Route path='/tv-series/:page' component={MoviesList}/> */}
+                <Route path='/movie' component={FilmDetails}/>
                 <Route path='/actor/:id' component={ActorDetails}/>
             </Route>
             

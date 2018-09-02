@@ -8,7 +8,7 @@ import {getDateFromString} from 'Pipes';
 class MoviePreview extends Component {
 
     render() {
-        const { film } = this.props;
+        const { film, type } = this.props;
         const shortDescription = `${R.take(150, film.overview)}...`
         return (
             <div className='movie-preview'>
@@ -24,7 +24,7 @@ class MoviePreview extends Component {
                         </div>
                         <div>
                             <hr/>
-                            <div ><Link className='movie-preview__link' to={`/film/${film.id}`} >More info</Link></div>
+                            <div ><Link className='movie-preview__link' to={`/movie?category=${type}&movieId=${film.id}`} >More info</Link></div>
                         </div>
                     </div>
                 </div>

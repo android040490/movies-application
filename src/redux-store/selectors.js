@@ -51,7 +51,13 @@ export const getUrlParamId = (props) => queryString.parse(props.location.search)
 
 export const getQueryParamSearch = (props) => queryString.parse(props.location.search).search;
 
+export const getQueryParamMovieId = (props) => queryString.parse(props.location.search).movieId;
+
+export const getQueryParamCategory = (props) => queryString.parse(props.location.search).category;
+
 export const getUrlParamPage = (props) => props.router.params.page;
+
+export const getUrlParamMoviesType = (props) => props.router.params.type;
 
 export const getCurrentPath = (props) => props.location.pathname.split('/')[1];
 
