@@ -10,6 +10,7 @@ import Preloader from 'components/Preloader';
 import ControllPanel from 'components/ControllPanel';
 import FilmThumbnail from 'components/FilmThumbnail';
 import PersonPageSidebar from 'components/PersonPageSidebar';
+import ThumbnailsList from 'components/ThumbnailsList';
 
 class ActorDetails extends Component {
     constructor(props) {
@@ -45,9 +46,10 @@ class ActorDetails extends Component {
                     </div>
                     <div className="person-page__main-content">
                         <h3>Known for :</h3>
-                        <div className="list-cards">
-                            {films.map(film => <div key={film.id} className="list-cards__item"><FilmThumbnail film={film} /></div>)}
-                        </div>
+                        <ThumbnailsList movies={films} category="films"/>
+                        {/* <div className="list-cards">
+                            {films.map(film => <div key={film.id} className="list-cards__item"><FilmThumbnail category="films" film={film} /></div>)}
+                        </div> */}
                     </div>
                 </div>
 

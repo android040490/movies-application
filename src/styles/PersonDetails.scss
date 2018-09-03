@@ -1,7 +1,8 @@
 .person-page{
     &__header{
-        background: $bg-header2;
+        background: linear-gradient(to top, $bg-header, $bg-header2 60%) ;
         padding: 20px;
+        margin-bottom: 20px;
     }
     &__content{
         display: flex;

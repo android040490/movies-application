@@ -10,7 +10,7 @@ class FilmThumbnail extends Component {
     }
     
     handleClick(){
-        this.props.router.push(`/film/${this.props.film.id}`)
+        this.props.router.push(`/movie?category=${this.props.category}&movieId=${this.props.film.id}`)
     }
 
     render() {
