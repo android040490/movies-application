@@ -9,7 +9,7 @@ class ActorThumbnail extends Component {
     }
     
     handleClick(){
-        this.props.router.push(`/actor/${this.props.data.id}`)
+        this.props.router.push(`/person/${this.props.data.id}`)
     }
 
     render() {

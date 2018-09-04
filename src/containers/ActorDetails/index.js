@@ -35,7 +35,7 @@ class ActorDetails extends Component {
                             <h2 className="person-card__title">{actor.name}</h2>
                             <div className="person-card__biography">
                                 <h4>Biography</h4>
-                                <p>{getSliceIfOverflow(actor.biography, 500) }</p>
+                                <p>{getSliceIfOverflow(actor.biography, 1000) }</p>
                             </div>
                         </div>
                     </div>
@@ -47,9 +47,6 @@ class ActorDetails extends Component {
                     <div className="person-page__main-content">
                         <h3>Known for :</h3>
                         <ThumbnailsList movies={films} category="films"/>
-                        {/* <div className="list-cards">
-                            {films.map(film => <div key={film.id} className="list-cards__item"><FilmThumbnail category="films" film={film} /></div>)}
-                        </div> */}
                     </div>
                 </div>
 

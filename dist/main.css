@@ -834,3 +834,53 @@ body {
   .carousel .slick-dots li.slick-active button:before {
     color: #000;
     font-size: 16px; }
+
+.persons-page__list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; }
+  .persons-page__list-item {
+    padding: 10px 0; }
+
+.persons-page__title {
+  font-family: Proxima Nova, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 25px;
+  color: #000; }
+
+.person-preview {
+  display: block;
+  background: #fff;
+  box-shadow: 2px 2px 6px 3px rgba(0, 0, 0, 0.3);
+  position: relative;
+  cursor: pointer; }
+  .person-preview-img {
+    width: 235px; }
+  .person-preview-title {
+    font-family: Proxima Nova, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    color: #000; }
+  .person-preview-text {
+    padding: 5px 10px;
+    font-family: Proxima Nova, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #696969; }
+
+.person-preview::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  opacity: 0;
+  box-shadow: 4px 4px 8px 6px rgba(0, 0, 0, 0.3);
+  transition: opacity .3s linear; }
+
+.person-preview:hover::after {
+  opacity: 1; }

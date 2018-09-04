@@ -22,7 +22,7 @@ const NavigationMenu = () => {
                     <li><Link className="nav-bar__link" to="/movies/tv-series/popular-series?page=1">Most popular</Link></li>
                 </ul>
             </li>
-            <li className="nav-bar__item">Actors</li>
+            <li ><Link className="nav-bar__item" to="/persons?page=1">Actors</Link></li>
         </ul>
     );
 };

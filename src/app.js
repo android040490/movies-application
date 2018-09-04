@@ -14,6 +14,7 @@ import Layout from 'components/Layout';
 import MoviesList from 'containers/MoviesList';
 import FilmDetails from 'containers/FilmDetails';
 import ActorDetails from 'containers/ActorDetails';
+import PersonsList from 'containers/PersonsList';
 
 const store = createStore(reducers, composeWithDevTools(
     applyMiddleware(thunk)
@@ -29,7 +30,8 @@ ReactDOM.render(
                 <Route path='/movies/:type/:page' component={MoviesList}/>
                 {/* <Route path='/tv-series/:page' component={MoviesList}/> */}
                 <Route path='/movie' component={FilmDetails}/>
-                <Route path='/actor/:id' component={ActorDetails}/>
+                <Route path='/person/:id' component={ActorDetails}/>
+                <Route path='/persons' component={PersonsList}/>
             </Route>
             
         </Router>

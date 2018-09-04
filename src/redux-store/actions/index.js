@@ -13,7 +13,10 @@ import {
     FETCH_ACTOR_BY_ID_SUCCESS,
     FETCH_FILMS_BY_SEARCH_START,
     FETCH_FILMS_BY_SEARCH_SUCCESS,
-    FETCH_FILMS_BY_SEARCH_FAILURE
+    FETCH_FILMS_BY_SEARCH_FAILURE,
+    FETCH_PERSONS_START,
+    FETCH_PERSONS_SUCCESS,
+    FETCH_PERSONS_FAILURE
 } from 'redux-store/actionTypes';
 
 export const getFilms = (moviesType, page, pathName,  pageId) =>  dispatch => {
@@ -89,4 +92,18 @@ export const getActorById = (id) => async (dispatch) => {
             movies : movies
         }
     })
+}
+
+export const getPersons = ( pageId ) => (dispatch) => {
+    dispatch({type : FETCH_PERSONS_START});
+
+    Api.fetchPopularPersons( pageId ).
+        then( resp => {
+            console.log(resp.data)
+            dispatch({
+                type : FETCH_PERSONS_SUCCESS,
+                payload : resp.data
+            })
+        } ).
+        catch( err => console.log(err))
 }

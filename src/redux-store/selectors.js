@@ -41,6 +41,12 @@ export const getActorFilms = (state) => state.actorDetails.films;
 
 export const getActorLoading = (state) => state.actorDetails.loading;
 
+// personPage
+
+export const getPersonsPageData = (state) => state.personsPage.data;
+
+export const getPersonsPageLoading = (state) => state.personsPage.loading;
+
 //PROPS selectors
 
 export const getRouter = (props) => props.router;
