@@ -385,12 +385,19 @@ body {
     display: flex;
     justify-content: center; }
 
-.movies-list {
+.movies-page__list {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap; }
-  .movies-list__item {
+  .movies-page__list-item {
     padding: 10px 0; }
+
+.movies-page__title {
+  font-family: Proxima Nova, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 25px;
+  color: #000; }
 
 .movie-preview {
   background: #fff;

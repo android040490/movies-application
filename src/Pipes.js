@@ -12,6 +12,14 @@ export const getStringOfFields = (field, list) => {
     return R.join(', ', R.pluck(field, list));
 };
 
+export const splitStringBy = ( string, separator, connector ) => {
+    return string.split(separator).join(connector)
+}
+
+export const firstCharToUpperCase = ( string ) => {
+    return(string.charAt(0).toUpperCase() + string.substring(1))
+}
+
 export const getSliceIfOverflow = (str, len) => {
     if (str.length > len) {
         return R.take(len, str) + '...'

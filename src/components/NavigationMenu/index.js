@@ -19,7 +19,7 @@ const NavigationMenu = () => {
             <li className="nav-bar__item"><div>TV series</div>
                 <div className="nav-bar__item-icon"><ReactSVG  src={arrow}/></div>
                 <ul>
-                    <li><Link className="nav-bar__link" to="/movies/tv-series/popular-series?page=1">Most popular</Link></li>
+                    <li><Link className="nav-bar__link" to="/movies/tv-series/popular-serials?page=1">Most popular</Link></li>
                 </ul>
             </li>
             <li ><Link className="nav-bar__item" to="/persons?page=1">Actors</Link></li>

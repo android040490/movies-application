@@ -1,11 +1,17 @@
-.movies-list{
-    display: flex;
-    justify-content: space-between; 
-    flex-wrap: wrap;
-    &__item{
-        padding: 10px 0;
+.movies-page{
+    &__list{
+        display: flex;
+        justify-content: space-between; 
+        flex-wrap: wrap;
+        &-item{
+            padding: 10px 0;
+        }
+    }
+    &__title{
+        @include font ( 25px, $font-col1, 700);
     }
 }
+
 
 .movie-preview{
     background: #fff;

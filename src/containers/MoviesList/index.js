@@ -13,6 +13,8 @@ import {
     getUrlParamMoviesType
     } from 'redux-store/selectors';
 
+import { splitStringBy, firstCharToUpperCase } from 'Pipes';
+
 import MoviePreview from 'components/MoviePreview';
 import Pagination from 'components/Pagination';
 import Search from 'components/SearchComponent';
@@ -47,14 +49,14 @@ class MoviesList extends Component {
 
     renderFilms (film) {
         return (
-            <div key={film.id}  className="movies-list__item">
+            <div key={film.id}  className="movies-page__list-item">
                 <MoviePreview type={this.props.moviesType}  film={film}/>
             </div>
         )
     }
     
     render() {
-        const {films} = this.props;
+        const {films, page, moviesType} = this.props;
         
         return (
             <div >
@@ -63,9 +65,12 @@ class MoviesList extends Component {
                     <Pagination/>
                 </ControllPanel>
                 <hr/>
-                <div className="movies-list wrapper">
-                    { this.props.loading ? <Preloader/> : this.props.films.map((film) => this.renderFilms(film))}
-                </div>      
+                <div className="movies-page wrapper">
+                    <h2 className="movies-page__title">{firstCharToUpperCase(splitStringBy( moviesType, '-', ' '))}: {splitStringBy( page , '-', ' ')}</h2>
+                    <div className="movies-page__list">
+                        { this.props.loading ? <Preloader/> : films.map((film) => this.renderFilms(film))}
+                    </div> 
+                </div>     
             </div>
                 
         );

@@ -16,11 +16,11 @@ export const fetchPopularSeries = (id) => {
 }
 
 export const fetchNowPlayingFilms = (id) => {
-    return axios.get(`${MOVIE_DB_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${id}`)
+    return axios.get(`${MOVIE_DB_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${id}&region=ru`)
 }
 
 export const fetchUpcomingFilms = (id) => {
-    return axios.get(`${MOVIE_DB_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${id}`)
+    return axios.get(`${MOVIE_DB_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${id}&region=ru`)
 }
 
 // Film details
@@ -83,7 +83,7 @@ export const fetchMovies = {
         'upcoming-in-cinemas' : fetchUpcomingFilms
     },
     'tv-series' : {
-        'popular-series' : fetchPopularSeries
+        'popular-serials' : fetchPopularSeries
     }
 }
 
