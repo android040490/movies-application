@@ -360,6 +360,12 @@ a {
   font-weight: 700;
   font-style: normal; }
 
+@font-face {
+  font-family: Proxima Nova;
+  src: url(/dist/assets/fonts/ProximaNovaCond-Black-e446a244.ttf);
+  font-weight: 900;
+  font-style: normal; }
+
 body {
   font-family: Proxima Nova, sans-serif;
   font-style: normal;
@@ -395,9 +401,10 @@ body {
 .movies-page__title {
   font-family: Proxima Nova, sans-serif;
   font-style: normal;
-  font-weight: 700;
-  font-size: 25px;
-  color: #000; }
+  font-weight: 900;
+  font-size: 40px;
+  color: #2678f1;
+  text-shadow: 2px 4px 2px #04351a; }
 
 .movie-preview {
   background: #fff;
@@ -570,6 +577,28 @@ body {
       color: #fff;
       padding-bottom: 20px; }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .header__logo {
+    font-family: Proxima Nova, sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 40px;
+    color: #2678f1;
+    background: #08f37d;
+    text-transform: uppercase;
+    padding: 10px;
+    box-shadow: 4px 2px 20px 4px #04aa04 inset, 0px 0px 20px 4px #04aa04; }
+  .header__logo span {
+    text-shadow: 4px 4px 30px #2678f1, -4px -4px 30px #2678f1, 0px 0px 1px #fff; }
+  .header__logo span:nth-child(2) {
+    animation: toggle-color 2s linear infinite; }
+  .header__logo span:nth-child(6) {
+    color: #050649;
+    text-shadow: 4px 4px 30px #000; }
+
 .nav-bar {
   display: flex;
   flex-direction: row; }
@@ -625,6 +654,22 @@ body {
     color: #F0F8FF;
     font-weight: 700;
     transition: color .3s linear; }
+
+@keyframes toggle-light {
+  50%, 52% {
+    box-shadow: none;
+    background: transparent; }
+  49%, 53% {
+    box-shadow: 4px 2px 20px 4px #04aa04 inset, 0px 0px 20px 4px #04aa04;
+    background: #08f37d; } }
+
+@keyframes toggle-color {
+  2%, 5%, 9%, 12%, 17%, 24%, 36%, 45% {
+    color: #050649;
+    text-shadow: 0px 0px 20px #000; }
+  6%, 8%, 13%, 16%, 25%, 35%, 46% {
+    color: #2678f1;
+    text-shadow: 4px 4px 30px #2678f1, -4px -4px 30px #2678f1; } }
 
 .nav-btn {
   position: relative;
@@ -852,9 +897,10 @@ body {
 .persons-page__title {
   font-family: Proxima Nova, sans-serif;
   font-style: normal;
-  font-weight: 700;
-  font-size: 25px;
-  color: #000; }
+  font-weight: 900;
+  font-size: 40px;
+  color: #2678f1;
+  text-shadow: 2px 4px 2px #04351a; }
 
 .person-preview {
   display: block;

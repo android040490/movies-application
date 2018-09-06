@@ -1,4 +1,27 @@
 .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__logo{
+        @include font(40px, $font-col8, 900);
+        background: rgb(8, 243, 125);
+        text-transform: uppercase;
+        padding: 10px;
+        box-shadow: 4px 2px 20px 4px $box-shadow inset,
+                    0px 0px 20px 4px $box-shadow;
+        // animation: toggle-light 3s linear infinite ;
+    }
+    &__logo span{
+        text-shadow: 4px 4px 30px $font-col8, -4px -4px 30px $font-col8, 0px 0px 1px #fff;
+    }
+    &__logo span:nth-child(2){
+        animation: toggle-color 2s linear infinite;
+    }
+    &__logo span:nth-child(6){
+        // animation: toggle-color 2s .5s linear infinite;
+        color: $font-col9;
+        text-shadow: 4px 4px 30px $font-col1;
+    }
     &__nav-bar{
 
     }
@@ -74,4 +97,16 @@
         font-weight: 700;
         transition: color .3s linear;
     }
+}
+
+
+@keyframes toggle-light{
+    50%, 52% {box-shadow: none; background: transparent }
+    49%, 53% {box-shadow: 4px 2px 20px 4px $box-shadow inset,
+        0px 0px 20px 4px $box-shadow; background: rgb(8, 243, 125)}
+}
+
+@keyframes toggle-color{
+    2%, 5%, 9%, 12%, 17%, 24%, 36%, 45%{color: $font-col9; text-shadow: 0px 0px 20px #000;}
+    6%, 8%, 13%, 16%, 25%, 35%, 46%{color: $font-col8; text-shadow: 4px 4px 30px $font-col8, -4px -4px 30px $font-col8;}
 }

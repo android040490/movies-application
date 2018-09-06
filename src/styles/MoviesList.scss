@@ -8,7 +8,8 @@
         }
     }
     &__title{
-        @include font ( 25px, $font-col1, 700);
+        @include font ( 40px, $font-col8, 900);
+        text-shadow: 2px 4px 2px $font-shadow;
     }
 }
 

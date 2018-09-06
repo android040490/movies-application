@@ -52617,6 +52617,40 @@ var Header = function Header() {
         'div',
         { className: 'header wrapper' },
         _react2.default.createElement(
+            'h1',
+            { className: 'header__logo' },
+            _react2.default.createElement(
+                'span',
+                null,
+                'M'
+            ),
+            _react2.default.createElement(
+                'span',
+                null,
+                'o'
+            ),
+            _react2.default.createElement(
+                'span',
+                null,
+                'v'
+            ),
+            _react2.default.createElement(
+                'span',
+                null,
+                'i'
+            ),
+            _react2.default.createElement(
+                'span',
+                null,
+                'e'
+            ),
+            _react2.default.createElement(
+                'span',
+                null,
+                's'
+            )
+        ),
+        _react2.default.createElement(
             'div',
             { className: 'header__nav-bar' },
             _react2.default.createElement(_NavigationMenu2.default, null)
