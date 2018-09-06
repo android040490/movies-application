@@ -24,7 +24,6 @@ import ControllPanel from 'components/ControllPanel';
 
 class MoviesList extends Component {
     componentWillMount() {
-        console.log(this.props)
         let {currentPage, pathName} = this.props;
         if( currentPage != pathName){
             this.fetchFilms(this.props)
@@ -66,7 +65,7 @@ class MoviesList extends Component {
                 </ControllPanel>
                 <hr/>
                 <div className="movies-page wrapper">
-                    <h2 className="movies-page__title">{firstCharToUpperCase(splitStringBy( moviesType, '-', ' '))}: {splitStringBy( page , '-', ' ')}</h2>
+                    <h2 className="movies-page__title">{firstCharToUpperCase( moviesType )} : {splitStringBy( page , '_', ' ')}</h2>
                     <div className="movies-page__list">
                         { this.props.loading ? <Preloader/> : films.map((film) => this.renderFilms(film))}
                     </div> 

@@ -11,7 +11,6 @@ class Label extends Component {
     }
 
     handleClick(){
-        console.log('click')
         this.setState((state) => ({ blink : !state.blink }))
     }
     

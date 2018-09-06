@@ -26,9 +26,8 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Route component={Layout}>
-                <Redirect from='/' to='/movies/films/top-rated' query={{'page' : 1}}/>
+                <Redirect from='/' to='/movies/movie/top_rated' query={{'page' : 1}}/>
                 <Route path='/movies/:type/:page' component={MoviesList}/>
-                {/* <Route path='/tv-series/:page' component={MoviesList}/> */}
                 <Route path='/movie' component={FilmDetails}/>
                 <Route path='/person/:id' component={ActorDetails}/>
                 <Route path='/persons' component={PersonsList}/>

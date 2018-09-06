@@ -3,24 +3,8 @@ import axios from 'axios';
 const API_KEY = 'ea53235d3cd5996cc07ef798483ee9c3';
 const MOVIE_DB_URL = 'https://api.themoviedb.org/3';
 
-export const fetchTopRatedFilms = (id) => {
-    return axios.get(`${MOVIE_DB_URL}/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${id}`)
-};
-
-export const fetchPopularFilms = (id) => {
-    return axios.get(`${MOVIE_DB_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${id}`)
-};
-
-export const fetchPopularSeries = (id) => {
-    return axios.get(`${MOVIE_DB_URL}/tv/popular?api_key=${API_KEY}&language=en-US&page=${id}`)
-}
-
-export const fetchNowPlayingFilms = (id) => {
-    return axios.get(`${MOVIE_DB_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${id}&region=ru`)
-}
-
-export const fetchUpcomingFilms = (id) => {
-    return axios.get(`${MOVIE_DB_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${id}&region=ru`)
+export const fetchMoviesList = ( typeMovie , typeSort, pageId ) => {
+    return axios.get(`${MOVIE_DB_URL}/${typeMovie}/${typeSort}?api_key=${API_KEY}&language=en-US&page=${pageId}`)
 }
 
 // Film details
@@ -75,34 +59,23 @@ export const fetchPopularPersons = (pageId) => {
     return axios.get(`${MOVIE_DB_URL}/person/popular?api_key=${API_KEY}&language=en-US&page=${pageId}`)
 }
 
-export const fetchMovies = {
-    'films': {
-        'top-rated' : fetchTopRatedFilms,
-        'popular' : fetchPopularFilms,
-        'now-in-cinemas' : fetchNowPlayingFilms,
-        'upcoming-in-cinemas' : fetchUpcomingFilms
-    },
-    'tv-series' : {
-        'popular-serials' : fetchPopularSeries
-    }
-}
 
 export const fetchInfoAboutMovie = {
     trailers : {
-        'films' : fetchFilmTrailers,
-        'tv-series' : fetchTvSeriesTrailers
+        'movie' : fetchFilmTrailers,
+        'tv' : fetchTvSeriesTrailers
     },
     movieInfo : {
-        'films' : fetchFilmDetails,
-        'tv-series' : fetchTvSeriesDetails
+        'movie' : fetchFilmDetails,
+        'tv' : fetchTvSeriesDetails
     },
     people : {
-        'films' : fetchFilmActors,
-        'tv-series' : fetchTvSeriesActors
+        'movie' : fetchFilmActors,
+        'tv' : fetchTvSeriesActors
     },
     similarMovies : {
-        'films' : fetchSimilarFilms,
-        'tv-series' : fetchSimilarTvSeries
+        'movie' : fetchSimilarFilms,
+        'tv' : fetchSimilarTvSeries
     }
 
 }

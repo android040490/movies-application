@@ -22,7 +22,7 @@ import {
 export const getFilms = (moviesType, page, pathName,  pageId) =>  dispatch => {
     dispatch({ type: FETCH_FILMS_START});
 
-    Api.fetchMovies[moviesType][page]( pageId )
+    Api.fetchMoviesList(moviesType, page, pageId )
         .then((response) => {
             dispatch({      
                 type: FETCH_FILMS_SUCCESS,
@@ -99,7 +99,6 @@ export const getPersons = ( pageId ) => (dispatch) => {
 
     Api.fetchPopularPersons( pageId ).
         then( resp => {
-            console.log(resp.data)
             dispatch({
                 type : FETCH_PERSONS_SUCCESS,
                 payload : resp.data

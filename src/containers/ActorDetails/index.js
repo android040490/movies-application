@@ -8,20 +8,16 @@ import {getSliceIfOverflow} from 'Pipes';
 import PreviousPageBtn from 'components/PreviousPageBtn';
 import Preloader from 'components/Preloader';
 import ControllPanel from 'components/ControllPanel';
-import FilmThumbnail from 'components/FilmThumbnail';
 import PersonPageSidebar from 'components/PersonPageSidebar';
 import ThumbnailsList from 'components/ThumbnailsList';
 
 class ActorDetails extends Component {
     constructor(props) {
         super(props);
-
-
     }
 
     componentWillMount() {
         this.props.getActorById(this.props.actorId)
-
     }
 
     renderActorDetails(actor, films) {
@@ -46,7 +42,7 @@ class ActorDetails extends Component {
                     </div>
                     <div className="person-page__main-content">
                         <h3>Known for :</h3>
-                        <ThumbnailsList movies={films} category="films"/>
+                        <ThumbnailsList movies={films} category="movie"/>
                     </div>
                 </div>
 
