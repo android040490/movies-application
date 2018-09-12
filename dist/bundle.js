@@ -58758,7 +58758,7 @@ var FilmInfo = function (_Component) {
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'film-page__header-img' },
-                                    _react2.default.createElement('img', { ref: this.posterRef, onLoad: this.getColor, crossOrigin: 'anonymous', src: ' https://image.tmdb.org/t/p/w600_and_h900_bestv2' + film.poster_path, alt: '' + film.title })
+                                    _react2.default.createElement('img', { ref: this.posterRef, onLoad: this.getColor, src: ' https://image.tmdb.org/t/p/w600_and_h900_bestv2' + film.poster_path, alt: '' + film.title })
                                 ),
                                 _react2.default.createElement(
                                     'div',
