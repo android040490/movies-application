@@ -18,7 +18,7 @@
     background: $bg-label;
     border: 3px solid $box-shadow;
     text-transform: uppercase;
-    padding: 10px;
+    padding: 10px 20px;
     box-shadow: 4px 2px 20px 4px $box-shadow inset,
                 0px 0px 20px 4px $box-shadow;
     cursor: pointer;
@@ -30,8 +30,12 @@
             
 .blink {
     animation: toggle-light 5s linear infinite ;
+    // span:nth-child(-n+5){
+        // animation: turn-light 5s linear infinite alternate-reverse;
+        // animation: toggle-color 3s 1.5s linear infinite alternate;
+    // }
     span:nth-child(2){
-        animation: toggle-color 2s linear infinite;
+        animation: toggle-color 2s linear infinite alternate;
     }
     span:nth-child(6){
         color: $font-col9;
@@ -43,6 +47,7 @@
 .nav-bar{
     display: flex;
     flex-direction: row;
+    padding: 0;
     &__item{
         display: flex;
         position: relative;
@@ -122,3 +127,11 @@
     2%, 5%, 9%, 12%, 17%, 24%, 36%, 45%{color: $font-col9; text-shadow: 0px 0px 20px #000;}
     6%, 8%, 13%, 16%, 25%, 35%, 46%{color: $font-col8; text-shadow: 4px 4px 30px $font-col8, -4px -4px 30px $font-col8;}
 }
+
+@keyframes turn-light{
+    50%, 52%, 54%, 56%, 58%, 99% {color: $font-col9; text-shadow: 0px 0px 20px #000;}
+    49%, 53%, 57%, 100% {color: $font-col8; text-shadow: 4px 4px 30px $font-col8, -4px -4px 30px $font-col8;}
+}
+
+
+

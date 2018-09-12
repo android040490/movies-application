@@ -446,16 +446,11 @@ body {
     color: #2F4F4F; }
 
 .film-page__header {
-  font-family: Proxima Nova, sans-serif;
-  font-style: normal;
   font-weight: 700;
-  font-size: 16px;
-  color: #fff;
   height: 100%;
   position: relative;
   overflow: hidden; }
   .film-page__header-wrapper {
-    background: rgba(50, 100, 150, 0.8);
     padding: 20px 0; }
   .film-page__header-content {
     display: flex;
@@ -469,17 +464,9 @@ body {
     padding: 20px; }
 
 .film-page__title {
-  font-family: Proxima Nova, sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  color: #fff; }
+  font-size: 40px; }
   .film-page__title span {
-    font-family: Proxima Nova, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 30px;
-    color: #F0F8FF; }
+    font-size: 30px; }
 
 .film-page__overview {
   padding-top: 30px; }
@@ -590,10 +577,10 @@ body {
   font-weight: 900;
   font-size: 40px;
   color: #5d9bf8;
-  background: #492401;
+  background: #3b1d01;
   border: 3px solid #b30606;
   text-transform: uppercase;
-  padding: 10px;
+  padding: 10px 20px;
   box-shadow: 4px 2px 20px 4px #b30606 inset, 0px 0px 20px 4px #b30606;
   cursor: pointer;
   border-radius: 10px; }
@@ -603,14 +590,15 @@ body {
 .blink {
   animation: toggle-light 5s linear infinite; }
   .blink span:nth-child(2) {
-    animation: toggle-color 2s linear infinite; }
+    animation: toggle-color 2s linear infinite alternate; }
   .blink span:nth-child(6) {
     color: #050649;
     text-shadow: 4px 4px 30px #000; }
 
 .nav-bar {
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+  padding: 0; }
   .nav-bar__item {
     display: flex;
     position: relative;
@@ -675,6 +663,14 @@ body {
     color: #050649;
     text-shadow: 0px 0px 20px #000; }
   6%, 8%, 13%, 16%, 25%, 35%, 46% {
+    color: #5d9bf8;
+    text-shadow: 4px 4px 30px #5d9bf8, -4px -4px 30px #5d9bf8; } }
+
+@keyframes turn-light {
+  50%, 52%, 54%, 56%, 58%, 99% {
+    color: #050649;
+    text-shadow: 0px 0px 20px #000; }
+  49%, 53%, 57%, 100% {
     color: #5d9bf8;
     text-shadow: 4px 4px 30px #5d9bf8, -4px -4px 30px #5d9bf8; } }
 

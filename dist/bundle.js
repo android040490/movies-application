@@ -4178,7 +4178,8 @@ var getStringOfFields = exports.getStringOfFields = function getStringOfFields(f
 };
 
 var splitStringBy = exports.splitStringBy = function splitStringBy(string, separator, connector) {
-    return string.split(separator).join(connector);
+    var regExp = new RegExp(separator, 'g');
+    return string.replace(regExp, connector);
 };
 
 var firstCharToUpperCase = exports.firstCharToUpperCase = function firstCharToUpperCase(string) {
@@ -20651,15 +20652,15 @@ var _MoviesList = __webpack_require__(816);
 
 var _MoviesList2 = _interopRequireDefault(_MoviesList);
 
-var _FilmDetails = __webpack_require__(839);
+var _MoviePage = __webpack_require__(839);
 
-var _FilmDetails2 = _interopRequireDefault(_FilmDetails);
+var _MoviePage2 = _interopRequireDefault(_MoviePage);
 
-var _ActorDetails = __webpack_require__(860);
+var _ActorDetails = __webpack_require__(862);
 
 var _ActorDetails2 = _interopRequireDefault(_ActorDetails);
 
-var _PersonsList = __webpack_require__(864);
+var _PersonsList = __webpack_require__(866);
 
 var _PersonsList2 = _interopRequireDefault(_PersonsList);
 
@@ -20680,7 +20681,7 @@ _reactDom2.default.render(_react2.default.createElement(
             { component: _Layout2.default },
             _react2.default.createElement(_reactRouter.Redirect, { from: '/', to: '/movies/movie/top_rated', query: { 'page': 1 } }),
             _react2.default.createElement(_reactRouter.Route, { path: '/movies/:type/:page', component: _MoviesList2.default }),
-            _react2.default.createElement(_reactRouter.Route, { path: '/movie', component: _FilmDetails2.default }),
+            _react2.default.createElement(_reactRouter.Route, { path: '/movie', component: _MoviePage2.default }),
             _react2.default.createElement(_reactRouter.Route, { path: '/person/:id', component: _ActorDetails2.default }),
             _react2.default.createElement(_reactRouter.Route, { path: '/persons', component: _PersonsList2.default })
         )
@@ -58463,7 +58464,7 @@ var Search = function (_Component) {
     _createClass(Search, [{
         key: 'changeLocation',
         value: function changeLocation(query) {
-            this.props.router.push('/movies/films/search?search=' + query + '&page=1');
+            this.props.router.push('/movies/movie/search?search=' + query + '&page=1');
         }
     }, {
         key: 'handleChange',
@@ -58541,23 +58542,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(80);
 
-var _reactParallax = __webpack_require__(840);
-
 var _actions = __webpack_require__(136);
 
 var _selectors = __webpack_require__(100);
 
-var _ActorThumbnail = __webpack_require__(841);
-
-var _ActorThumbnail2 = _interopRequireDefault(_ActorThumbnail);
-
 var _PreviousPageBtn = __webpack_require__(326);
 
 var _PreviousPageBtn2 = _interopRequireDefault(_PreviousPageBtn);
-
-var _FilmSidebar = __webpack_require__(842);
-
-var _FilmSidebar2 = _interopRequireDefault(_FilmSidebar);
 
 var _Preloader = __webpack_require__(137);
 
@@ -58567,9 +58558,9 @@ var _ControllPanel = __webpack_require__(138);
 
 var _ControllPanel2 = _interopRequireDefault(_ControllPanel);
 
-var _SliderCarousel = __webpack_require__(843);
+var _FilmInfo = __webpack_require__(840);
 
-var _SliderCarousel2 = _interopRequireDefault(_SliderCarousel);
+var _FilmInfo2 = _interopRequireDefault(_FilmInfo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58579,19 +58570,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Film = function (_Component) {
-    _inherits(Film, _Component);
+var MoviePage = function (_Component) {
+    _inherits(MoviePage, _Component);
 
-    function Film(props) {
-        _classCallCheck(this, Film);
+    function MoviePage(props) {
+        _classCallCheck(this, MoviePage);
 
-        var _this = _possibleConstructorReturn(this, (Film.__proto__ || Object.getPrototypeOf(Film)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (MoviePage.__proto__ || Object.getPrototypeOf(MoviePage)).call(this, props));
 
         _this.handleClick = _this.handleClick.bind(_this);
         return _this;
     }
 
-    _createClass(Film, [{
+    _createClass(MoviePage, [{
         key: 'handleClick',
         value: function handleClick() {
             this.props.router.goBack();
@@ -58599,7 +58590,6 @@ var Film = function (_Component) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            console.log(this.props);
             this.props.getFilmById(this.props.movieCategory, this.props.movieId);
         }
     }, {
@@ -58612,11 +58602,142 @@ var Film = function (_Component) {
     }, {
         key: 'renderFilm',
         value: function renderFilm() {
+            return _react2.default.createElement(_FilmInfo2.default, this.props);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _props = this.props,
+                film = _props.film,
+                loading = _props.loading;
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    _ControllPanel2.default,
+                    null,
+                    _react2.default.createElement(_PreviousPageBtn2.default, null)
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    !loading && Object.keys(film).length ? this.renderFilm() : _react2.default.createElement(_Preloader2.default, null)
+                )
+            );
+        }
+    }]);
+
+    return MoviePage;
+}(_react.Component);
+
+;
+
+var mapDispatchToProps = {
+    getFilmById: _actions.getFilmById
+};
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+    return {
+        film: (0, _selectors.getFilmDetails)(state),
+        trailerId: (0, _selectors.getTrailerId)(state),
+        actors: (0, _selectors.getActors)(state),
+        loading: (0, _selectors.getFilmLoading)(state),
+        similarFilms: (0, _selectors.getSimilarFilms)(state),
+        fullPath: (0, _selectors.getFullLocationPath)(ownProps),
+        movieId: (0, _selectors.getQueryParamMovieId)(ownProps),
+        movieCategory: (0, _selectors.getQueryParamCategory)(ownProps)
+    };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MoviePage);
+
+/***/ }),
+/* 840 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactParallax = __webpack_require__(841);
+
+var _index = __webpack_require__(842);
+
+var _index2 = _interopRequireDefault(_index);
+
+var _ActorThumbnail = __webpack_require__(843);
+
+var _ActorThumbnail2 = _interopRequireDefault(_ActorThumbnail);
+
+var _FilmSidebar = __webpack_require__(844);
+
+var _FilmSidebar2 = _interopRequireDefault(_FilmSidebar);
+
+var _SliderCarousel = __webpack_require__(845);
+
+var _SliderCarousel2 = _interopRequireDefault(_SliderCarousel);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var FilmInfo = function (_Component) {
+    _inherits(FilmInfo, _Component);
+
+    function FilmInfo(props) {
+        _classCallCheck(this, FilmInfo);
+
+        var _this = _possibleConstructorReturn(this, (FilmInfo.__proto__ || Object.getPrototypeOf(FilmInfo)).call(this, props));
+
+        _this.state = {
+            bg: 'rgba(255, 255, 255, .7)',
+            color: '#fff'
+        };
+
+        _this.posterRef = _react2.default.createRef();
+        _this.getColor = _this.getColor.bind(_this);
+        return _this;
+    }
+
+    _createClass(FilmInfo, [{
+        key: 'getColor',
+        value: function getColor() {
+            var fac = new _index2.default();
+            var container = this.posterRef.current;
+            var color = fac.getColor(container, { top: 600 });
+            var value = color.value,
+                isDark = color.isDark;
+
+            var bg = 'rgba(' + value[0] + ',' + value[1] + ',' + value[2] + ', .7)';
+
+            this.setState({ bg: bg, color: isDark ? '#fff' : '#000' });
+            fac.destroy();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
             var _props = this.props,
                 film = _props.film,
                 trailerId = _props.trailerId,
                 actors = _props.actors,
                 similarFilms = _props.similarFilms;
+            var _state = this.state,
+                bg = _state.bg,
+                color = _state.color;
 
             return _react2.default.createElement(
                 'div',
@@ -58624,20 +58745,20 @@ var Film = function (_Component) {
                 _react2.default.createElement(
                     _reactParallax.Parallax,
                     { bgImage: 'https://image.tmdb.org/t/p/original' + film.backdrop_path,
-                        strength: 400 },
+                        strength: 200 },
                     _react2.default.createElement(
                         'div',
-                        { className: 'film-page__header' },
+                        { style: { color: color }, className: 'film-page__header' },
                         _react2.default.createElement(
                             'div',
-                            { className: 'film-page__header-wrapper' },
+                            { style: { backgroundColor: bg }, className: 'film-page__header-wrapper' },
                             _react2.default.createElement(
                                 'div',
                                 { className: 'film-page__header-content wrapper' },
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'film-page__header-img' },
-                                    _react2.default.createElement('img', { className: '', src: ' https://image.tmdb.org/t/p/w600_and_h900_bestv2' + film.poster_path, alt: '' + film.title })
+                                    _react2.default.createElement('img', { ref: this.posterRef, onLoad: this.getColor, crossOrigin: 'anonymous', src: ' https://image.tmdb.org/t/p/w600_and_h900_bestv2' + film.poster_path, alt: '' + film.title })
                                 ),
                                 _react2.default.createElement(
                                     'div',
@@ -58663,7 +58784,7 @@ var Film = function (_Component) {
                                         'div',
                                         { className: 'film-page__overview' },
                                         _react2.default.createElement(
-                                            'h5',
+                                            'h4',
                                             null,
                                             'Overview:'
                                         ),
@@ -58743,62 +58864,440 @@ var Film = function (_Component) {
                 )
             );
         }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _props2 = this.props,
-                film = _props2.film,
-                loading = _props2.loading;
-
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    _ControllPanel2.default,
-                    null,
-                    _react2.default.createElement(_PreviousPageBtn2.default, null)
-                ),
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    !loading && Object.keys(film).length ? this.renderFilm() : _react2.default.createElement(_Preloader2.default, null)
-                )
-            );
-        }
     }]);
 
-    return Film;
+    return FilmInfo;
 }(_react.Component);
 
-;
-
-var mapDispatchToProps = {
-    getFilmById: _actions.getFilmById
-};
-
-var mapStateToProps = function mapStateToProps(state, ownProps) {
-    return {
-        film: (0, _selectors.getFilmDetails)(state),
-        trailerId: (0, _selectors.getTrailerId)(state),
-        actors: (0, _selectors.getActors)(state),
-        loading: (0, _selectors.getFilmLoading)(state),
-        similarFilms: (0, _selectors.getSimilarFilms)(state),
-        fullPath: (0, _selectors.getFullLocationPath)(ownProps),
-        movieId: (0, _selectors.getQueryParamMovieId)(ownProps),
-        movieCategory: (0, _selectors.getQueryParamCategory)(ownProps)
-    };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Film);
+exports.default = FilmInfo;
 
 /***/ }),
-/* 840 */
+/* 841 */
 /***/ (function(module, exports, __webpack_require__) {
 
 !function(e,t){ true?module.exports=t(__webpack_require__(4),__webpack_require__(24),__webpack_require__(117)):"function"==typeof define&&define.amd?define(["react","prop-types","react-dom"],t):"object"==typeof exports?exports["react-parallax"]=t(require("react"),require("prop-types"),require("react-dom")):e["react-parallax"]=t(e.React,e.PropTypes,e.ReactDOM)}(this,function(e,t,n){return function(e){function t(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return e[i].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,i){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:i})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=4)}([function(t,n){t.exports=e},function(e,n){e.exports=t},function(e,t,n){"use strict";function i(e){return e&&e.__esModule?e:{default:e}}function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function a(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function o(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(t,"__esModule",{value:!0});var s=function(){function e(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(t,n,i){return n&&e(t.prototype,n),i&&e(t,i),t}}(),l=n(1),u=i(l),c=n(0),d=i(c),g=function(e){function t(){return r(this,t),a(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return o(t,e),s(t,[{key:"render",value:function(){return d.default.createElement("div",{className:"react-parallax-background "+this.props.className},this.props.children)}}],[{key:"isParallaxBackground",value:function(){return!0}}]),t}(d.default.Component);g.propTypes={children:u.default.node,className:u.default.string},g.defaultProps={className:""},t.default=g},function(e,t,n){"use strict";function i(e){return e&&e.__esModule?e:{default:e}}function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function a(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function o(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(t,"__esModule",{value:!0});var s=function(){function e(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(t,n,i){return n&&e(t.prototype,n),i&&e(t,i),t}}(),l=n(1),u=i(l),c=n(0),d=i(c),g=n(6),f=i(g),p=n(5),h=function(e){function t(e){r(this,t);var n=a(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));return n.onWindowResize=function(){n.parentHeight=(0,p.getNodeHeight)(n.canUseDOM,n.parent),n.updatePosition()},n.onWindowLoad=function(){n.updatePosition()},n.onScroll=function(e){if(n.canUseDOM){var t=Date.now();t-n.timestamp>=10&&(0,p.isScrolledIntoView)(n.node,100,n.canUseDOM)&&(window.requestAnimationFrame(n.updatePosition),n.timestamp=t)}},n.updatePosition=function(){var e=!1;if(n.content=n.ReactDOM.findDOMNode(n.refs.content),n.contentHeight=n.content.getBoundingClientRect().height,n.contentWidth=n.node.getBoundingClientRect().width,n.content){n.img&&n.img.naturalWidth/n.img.naturalHeight<n.contentWidth/n.getImageHeight()&&(e=!0);var t=(0,p.getRelativePosition)(n.node,n.canUseDOM,n.parent);n.img&&n.setImagePosition(t,e),n.bg&&n.splitChildren.bgChildren.length>0&&n.setBackgroundPosition(t)}},n.state={bgImage:e.bgImage,bgImageSrcSet:e.bgImageSrcSet,bgImageSizes:e.bgImageSizes,childStyle:{position:"relative"}},n.canUseDOM=(0,p.canUseDOM)(),n.ReactDOM=f.default.findDOMNode?f.default:d.default,n.node=null,n.content=null,n.splitChildren=(0,p.getSplitChildren)(e),n.bgImageLoaded=!1,n.bgImageRef=void 0,n.parent=e.parent,n.parentHeight=(0,p.getNodeHeight)(n.canUseDOM,n.parent),n.timestamp=Date.now(),n.dynamicBlur=!(!e.blur||void 0===e.blur.min||void 0===e.blur.max),n}return o(t,e),s(t,[{key:"componentDidMount",value:function(){var e=this.props.parent,t=this.state,n=t.bgImage,i=t.bgImageSrcSet,r=t.bgImageSizes;this.parent=e||document,this.addListeners(this.props),this.node=this.ReactDOM.findDOMNode(this),n?this.loadImage(n,i,r):this.updatePosition(),this.setParallaxStyle(),this.setInitialBackgroundStyles(this.img),this.setInitialBackgroundStyles(this.bg)}},{key:"componentWillReceiveProps",value:function(e){var t=e.parent,n=e.bgImage,i=e.bgImageSrcSet,r=e.bgImageSizes;this.splitChildren=(0,p.getSplitChildren)(e),t&&this.parent!==t&&(this.parent=t,this.removeListeners(),this.addListeners()),this.parentHeight=(0,p.getNodeHeight)(this.canUseDOM,this.parent),this.state.bgImage!==n&&this.loadImage(n,i,r)}},{key:"shouldComponentUpdate",value:function(e,t){return e.bgImage===this.props.bgImage||t.bgImage!==this.state.bgImage}},{key:"componentWillUnmount",value:function(){this.removeListeners(this.parent),this.releaseImage()}},{key:"setParallaxStyle",value:function(){this.node&&(this.node.style.position="relative",this.node.style.overflow="hidden")}},{key:"setInitialBackgroundStyles",value:function(e){var t=this;e&&(e.style.position="absolute",e.style.left="50%",e.style.WebkitTransform="translate3d(-50%, 0, 0)",e.style.transform="translate3d(-50%, 0, 0)",e.style.WebkitTransformStyle="preserve-3d",e.style.WebkitBackfaceVisibility="hidden",e.style.MozBackfaceVisibility="hidden",e.style.MsBackfaceVisibility="hidden",this.props.bgStyle&&Object.keys(this.props.bgStyle).forEach(function(n){e.style[n]=t.props.bgStyle[n]}))}},{key:"setBackgroundPosition",value:function(e){var t=this.props,n=t.disabled,i=t.strength;if(!0!==n){var r=i<0,a=(r?i:0)-i*e;this.bg.style.WebkitTransform="translate3d(-50%, "+a+"px, 0)",this.bg.style.transform="translate3d(-50%, "+a+"px, 0)"}}},{key:"setImagePosition",value:function(e){var t=arguments.length>1&&void 0!==arguments[1]&&arguments[1],n=this.props,i=n.bgHeight,r=n.bgWidth,a=n.disabled,o=n.strength,s=n.blur,l=i||(t?"auto":this.getImageHeight()+"px"),u=r||(t?this.contentWidth+"px":"auto");if(this.img.style.height=l,this.img.style.width=u,!0!==a){var c=o<0,d=(c?o:0)-o*e;if(this.img.style.WebkitTransform="translate3d(-50%, "+d+"px, 0)",this.img.style.transform="translate3d(-50%, "+d+"px, 0)",s){var g=this.dynamicBlur?s.min+(1-e)*s.max:s;(0,p.setBlur)(this.img,g)}}}},{key:"getImageHeight",value:function(){var e=this.props.strength<0,t=e?2.5:1,n=t*Math.abs(this.props.strength);return Math.floor(this.contentHeight+n)}},{key:"addListeners",value:function(){this.canUseDOM&&this.parent&&(this.parent.addEventListener("scroll",this.onScroll,!1),window.addEventListener("resize",this.onWindowResize,!1),window.addEventListener("load",this.onWindowLoad,!1))}},{key:"removeListeners",value:function(){this.canUseDOM&&this.parent&&(this.parent.removeEventListener("scroll",this.onScroll,!1),window.removeEventListener("resize",this.onWindowResize,!1),window.removeEventListener("load",this.onWindowLoad,!1))}},{key:"loadImage",value:function(e,t,n){var i=this;this.releaseImage(),this.bgImageRef=new Image,this.bgImageRef.onload=function(r){i.setState({bgImage:e,bgImageSrcSet:t,bgImageSizes:n},function(){return i.updatePosition()})},this.bgImageRef.onerror=this.bgImageRef.onload,this.bgImageRef.src=e,this.bgImageRef.srcset=t||"",this.bgImageRef.sizes=n||""}},{key:"releaseImage",value:function(){this.bgImageRef&&(this.bgImageRef.onload=null,this.bgImageRef.onerror=null,delete this.bgImageRef)}},{key:"bgMounted",value:function(e){this.bg=this.ReactDOM.findDOMNode(e)}},{key:"log",value:function(){if(this.props.log){for(var e=arguments.length,t=Array(e),n=0;n<e;n++)t[n]=arguments[n];console.log(t)}}},{key:"render",value:function(){var e=this,t=this.props,n=t.className,i=t.style,r=t.bgClassName,a=t.bgImageAlt,o=this.state,s=o.bgImage,l=o.bgImageSrcSet,u=o.bgImageSizes,c=o.childStyle;return d.default.createElement("div",{className:"react-parallax "+n,style:i},s?d.default.createElement("img",{className:r,src:s,srcSet:l,sizes:u,ref:function(t){return e.img=t},alt:a}):null,this.splitChildren.bgChildren.length>0?d.default.createElement("div",{className:"react-parallax-background-children",ref:function(t){return e.bgMounted(t)}},this.splitChildren.bgChildren):null,d.default.createElement("div",{className:"react-parallax-content",style:c,ref:"content"},this.splitChildren.children))}}]),t}(d.default.Component);h.propTypes={bgClassName:u.default.string,bgHeight:u.default.string,bgImage:u.default.string,bgImageAlt:u.default.string,bgImageSizes:u.default.string,bgImageSrcSet:u.default.string,bgStyle:u.default.object,bgWidth:u.default.string,blur:u.default.oneOfType([u.default.number,u.default.object]),className:u.default.string,disabled:u.default.bool,log:u.default.bool,parent:u.default.any,strength:u.default.number,style:u.default.object},h.defaultProps={bgClassName:"react-parallax-bgimage",bgImageAlt:"",className:"",disabled:!1,log:!1,strength:100},t.default=h},function(e,t,n){"use strict";function i(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0}),t.Background=t.Parallax=void 0;var r=n(3),a=i(r),o=n(2),s=i(o);t.Parallax=a.default,t.Background=s.default},function(e,t,n){"use strict";function i(e){if(!e)return 0;var t=window,n=document,i=n.documentElement,r=n.getElementsByTagName("body")[0];return t.innerHeight||i.clientHeight||r.clientHeight}function r(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:0,n=arguments[2];if(!n)return!1;var r=e.getBoundingClientRect().top-t,a=e.getBoundingClientRect().bottom+t;return r<=i(n)&&a>=0}function a(e,t){return e?t?t.clientHeight:i(e):0}function o(){return!("undefined"==typeof window||!window.document||!window.document.createElement)}function s(e,t,n){return(n-e)/(t-e)||0}function l(e,t,n){if(!t)return 0;var i=e,r=Math.round(i.getBoundingClientRect().top),o=a(t);return r=r>o?o:r,s(0,o,r)}function u(e){var t=[],n=g.default.Children.toArray(e.children);return n.forEach(function(e,i){e.type&&e.type.isParallaxBackground&&(t=t.concat(n.splice(i,1)))}),{bgChildren:t,children:n}}function c(e,t){e.style.WebkitFilter="blur("+t+"px)",e.style.filter="blur("+t+"px)"}Object.defineProperty(t,"__esModule",{value:!0}),t.getWindowHeight=i,t.isScrolledIntoView=r,t.getNodeHeight=a,t.canUseDOM=o,t.getPercentage=s,t.getRelativePosition=l,t.getSplitChildren=u,t.setBlur=c;var d=n(0),g=function(e){return e&&e.__esModule?e:{default:e}}(d)},function(e,t){e.exports=n}])});
 
 /***/ }),
-/* 841 */
+/* 842 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/*! Fast Average Color | © 2018 Denis Seleznev | MIT License | https://github.com/hcodes/fast-average-color/ */
+class FastAverageColor {
+    /**
+     * Get asynchronously the average color from not loaded image.
+     *
+     * @param {HTMLImageElement} resource
+     * @param {Function} callback
+     * @param {Object|null} [options]
+     * @param {Array}  [options.defaultColor=[255, 255, 255, 255]]
+     * @param {*}      [options.data]
+     * @param {string} [options.mode="speed"] "precision" or "speed"
+     * @param {string} [options.algorithm="sqrt"] "simple", "sqrt" or "dominant"
+     * @param {number} [options.step=1]
+     * @param {number} [options.left=0]
+     * @param {number} [options.top=0]
+     * @param {number} [options.width=width of resource]
+     * @param {number} [options.height=height of resource]
+     */
+    getColorAsync(resource, callback, options) {
+        if (resource.complete) {
+            callback.call(resource, this.getColor(resource, options), options && options.data);
+        } else {
+            this._bindImageEvents(resource, callback, options);
+        }
+    }
+
+    /**
+     * Get the average color from images, videos and canvas.
+     *
+     * @param {HTMLImageElement|HTMLVideoElement|HTMLCanvasElement} resource
+     * @param {Object|null} [options]
+     * @param {Array}  [options.defaultColor=[255, 255, 255, 255]]
+     * @param {*}      [options.data]
+     * @param {string} [options.mode="speed"] "precision" or "speed"
+     * @param {string} [options.algorithm="sqrt"] "simple", "sqrt" or "dominant"
+     * @param {number} [options.step=1]
+     * @param {number} [options.left=0]
+     * @param {number} [options.top=0]
+     * @param {number} [options.width=width of resource]
+     * @param {number} [options.height=height of resource]
+     *
+     * @returns {Object}
+     */
+    getColor(resource, options) {
+        options = options || {};
+
+        const
+            defaultColor = this._getDefaultColor(options),
+            originalSize = this._getOriginalSize(resource),
+            size = this._prepareSizeAndPosition(originalSize, options);
+
+        let
+            error = null,
+            value = defaultColor;
+
+        if (!size.srcWidth || !size.srcHeight || !size.destWidth || !size.destHeight) {
+            return this._prepareResult(
+                defaultColor,
+                new Error('FastAverageColor: Incorrect sizes.')
+            );
+        }
+
+        if (!this._ctx) {
+            this._canvas = document.createElement('canvas');
+            this._ctx = this._canvas.getContext && this._canvas.getContext('2d');
+
+            if (!this._ctx) {
+                return this._prepareResult(
+                    defaultColor,
+                    new Error('FastAverageColor: Canvas Context 2D is not supported in this browser.')
+                );
+            }
+        }
+
+        this._canvas.width = size.destWidth;
+        this._canvas.height = size.destHeight;
+
+        try {
+            this._ctx.clearRect(0, 0, size.destWidth, size.destHeight);
+            this._ctx.drawImage(
+                resource,
+                size.srcLeft, size.srcTop,
+                size.srcWidth, size.srcHeight,
+                0, 0,
+                size.destWidth, size.destHeight
+            );
+
+            const bitmapData = this._ctx.getImageData(0, 0, size.destWidth, size.destHeight).data;
+            value = this.getColorFromArray4(bitmapData, options);
+        } catch (e) {
+            // Security error, CORS
+            // https://developer.mozilla.org/en/docs/Web/HTML/CORS_enabled_image
+            error = e;
+        }
+
+        return this._prepareResult(value, error);
+    }
+
+    /**
+     * Get the average color from a array when 1 pixel is 4 bytes.
+     *
+     * @param {Array|Uint8Array} arr
+     * @param {Object} [options]
+     * @param {string} [options.algorithm="sqrt"] "simple", "sqrt" or "dominant"
+     * @param {Array}  [options.defaultColor=[255, 255, 255, 255]]
+     * @param {number} [options.step=1]
+     *
+     * @returns {Array} [red (0-255), green (0-255), blue (0-255), alpha (0-255)]
+     */
+    getColorFromArray4(arr, options) {
+        options = options || {};
+
+        const
+            bytesPerPixel = 4,
+            arrLength = arr.length;
+
+        if (arrLength < bytesPerPixel) {
+            return this._getDefaultColor(options);
+        }
+
+        const
+            len = arrLength - arrLength % bytesPerPixel,
+            preparedStep = (options.step || 1) * bytesPerPixel,
+            algorithm = '_' + (options.algorithm || 'sqrt') + 'Algorithm';
+
+        if (typeof this[algorithm] !== 'function') {
+            throw new Error(`FastAverageColor: ${options.algorithm} is unknown algorithm.`);
+        }
+
+        return this[algorithm](arr, len, preparedStep);
+    }
+
+    /**
+     * Destroy the instance.
+     */
+    destroy() {
+        delete this._canvas;
+        delete this._ctx;
+    }
+
+    _getDefaultColor(options) {
+        return this._getOption(options, 'defaultColor', [255, 255, 255, 255]);
+    }
+
+    _getOption(options, name, defaultValue) {
+        return typeof options[name] === 'undefined' ? defaultValue : options[name];
+    }
+
+    _prepareSizeAndPosition(originalSize, options) {
+        let
+            srcLeft = this._getOption(options, 'left', 0),
+            srcTop = this._getOption(options, 'top', 0),
+            srcWidth = this._getOption(options, 'width', originalSize.width),
+            srcHeight = this._getOption(options, 'height', originalSize.height),
+            destWidth = srcWidth,
+            destHeight = srcHeight;
+
+        if (options.mode === 'precision') {
+            return {
+                srcLeft,
+                srcTop,
+                srcWidth,
+                srcHeight,
+                destWidth,
+                destHeight
+            };
+        }
+
+        const
+            maxSize = 100,
+            minSize = 10;
+
+        let factor;
+
+        if (srcWidth > srcHeight) {
+            factor = srcWidth / srcHeight;
+            destWidth = maxSize;
+            destHeight = Math.round(destWidth / factor);
+        } else {
+            factor = srcHeight / srcWidth;
+            destHeight = maxSize;
+            destWidth = Math.round(destHeight / factor);
+        }
+
+        if (
+            destWidth > srcWidth || destHeight > srcHeight ||
+            destWidth < minSize || destHeight < minSize
+        ) {
+            destWidth = srcWidth;
+            destHeight = srcHeight;
+        }
+
+        return {
+            srcLeft,
+            srcTop,
+            srcWidth,
+            srcHeight,
+            destWidth,
+            destHeight
+        };
+    }
+
+    _simpleAlgorithm(arr, len, preparedStep) {
+        let
+            redTotal = 0,
+            greenTotal = 0,
+            blueTotal = 0,
+            alphaTotal = 0,
+            count = 0;
+
+        for (let i = 0; i < len; i += preparedStep) {
+            const
+                alpha = arr[i + 3],
+                red = arr[i] * alpha,
+                green = arr[i + 1] * alpha,
+                blue = arr[i + 2] * alpha;
+
+            redTotal += red;
+            greenTotal += green;
+            blueTotal += blue;
+            alphaTotal += alpha;
+            count++;
+        }
+
+        return alphaTotal ? [
+            Math.round(redTotal / alphaTotal),
+            Math.round(greenTotal / alphaTotal),
+            Math.round(blueTotal / alphaTotal),
+            Math.round(alphaTotal / count)
+        ] : [0, 0, 0, 0];
+    }
+
+    _sqrtAlgorithm(arr, len, preparedStep) {
+        let
+            redTotal = 0,
+            greenTotal = 0,
+            blueTotal = 0,
+            alphaTotal = 0,
+            count = 0;
+
+        for (let i = 0; i < len; i += preparedStep) {
+            const
+                red = arr[i],
+                green = arr[i + 1],
+                blue = arr[i + 2],
+                alpha = arr[i + 3];
+
+            redTotal += red * red * alpha;
+            greenTotal += green * green * alpha;
+            blueTotal += blue * blue * alpha;
+            alphaTotal += alpha;
+            count++;
+        }
+
+        return alphaTotal ? [
+            Math.round(Math.sqrt(redTotal / alphaTotal)),
+            Math.round(Math.sqrt(greenTotal / alphaTotal)),
+            Math.round(Math.sqrt(blueTotal / alphaTotal)),
+            Math.round(alphaTotal / count)
+        ] : [0, 0, 0, 0];
+    }
+    
+    _dominantAlgorithm(arr, len, preparedStep) {
+        const
+            colorHash = {},
+            divider = 24;
+        
+        for (let i = 0; i < len; i += preparedStep) {
+            let
+                red = arr[i],
+                green = arr[i + 1],
+                blue = arr[i + 2],
+                alpha = arr[i + 3],
+                key = Math.round(red / divider) + ',' +
+                    Math.round(green / divider) + ',' +
+                    Math.round(blue / divider);
+
+            if (colorHash[key]) {
+                colorHash[key] = [
+                    colorHash[key][0] + red * alpha,
+                    colorHash[key][1] + green * alpha,
+                    colorHash[key][2] + blue * alpha,
+                    colorHash[key][3] + alpha,
+                    colorHash[key][4] + 1
+                ];
+            } else {
+                colorHash[key] = [red * alpha, green * alpha, blue * alpha, alpha, 1];
+            }
+        }
+
+        const buffer = Object.keys(colorHash).map(function(key) {
+            return colorHash[key];
+        }).sort(function(a, b) {
+            const
+                countA = a[4],
+                countB = b[4];
+
+            return countA > countB ?  -1 : countA === countB ? 0 : 1;
+        });
+
+        const [redTotal, greenTotal, blueTotal, alphaTotal, count] = buffer[0];
+        
+        return alphaTotal ? [
+            Math.round(redTotal / alphaTotal),
+            Math.round(greenTotal / alphaTotal),
+            Math.round(blueTotal / alphaTotal),
+            Math.round(alphaTotal / count)
+        ] : [0, 0, 0, 0];
+    }
+
+    _bindImageEvents(resource, callback, options) {
+        options = options || {};
+
+        const
+            data = options && options.data,
+            defaultColor = this._getDefaultColor(options),
+            onload = () => {
+                unbindEvents();
+
+                callback.call(
+                    resource,
+                    this.getColor(resource, options),
+                    data
+                );
+            },
+            onerror = () => {
+                unbindEvents();
+
+                callback.call(
+                    resource,
+                    this._prepareResult(defaultColor, new Error('Image error')),
+                    data
+                );
+            },
+            onabort = () => {
+                unbindEvents();
+
+                callback.call(
+                    resource,
+                    this._prepareResult(defaultColor, new Error('Image abort')),
+                    data
+                );
+            },
+            unbindEvents = () => {
+                resource.removeEventListener('load', onload);
+                resource.removeEventListener('error', onerror);
+                resource.removeEventListener('abort', onabort);
+            };
+
+        resource.addEventListener('load', onload);
+        resource.addEventListener('error', onerror);
+        resource.addEventListener('abort', onabort);
+    }
+
+    _prepareResult(value, error) {
+        const
+            rgb = value.slice(0, 3),
+            rgba = [].concat(rgb, value[3] / 255),
+            isDark = this._isDark(value);
+
+        return {
+            error,
+            value,
+            rgb: 'rgb(' + rgb.join(',') + ')',
+            rgba: 'rgba(' + rgba.join(',') + ')',
+            hex: this._arrayToHex(rgb),
+            hexa: this._arrayToHex(value),
+            isDark,
+            isLight: !isDark
+        };
+    }
+
+    _getOriginalSize(resource) {
+        if (resource instanceof HTMLImageElement) {
+            return {
+                width: resource.naturalWidth,
+                height: resource.naturalHeight
+            };
+        }
+
+        if (resource instanceof HTMLVideoElement) {
+            return {
+                width: resource.videoWidth,
+                height: resource.videoHeight
+            };
+        }
+
+        return {
+            width: resource.width,
+            height: resource.height
+        };
+    }
+
+    _toHex(num) {
+        let str = num.toString(16);
+        return str.length === 1 ? '0' + str : str;
+    }
+
+    _arrayToHex(arr) {
+        return '#' + arr.map(this._toHex).join('');
+    }
+
+    _isDark(color) {
+        // http://www.w3.org/TR/AERT#color-contrast
+        const result = (color[0] * 299 + color[1] * 587 + color[2] * 114) / 1000;
+
+        return result < 128;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["default"] = FastAverageColor;
+
+
+
+/***/ }),
+/* 843 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58878,7 +59377,7 @@ var ActorThumbnail = function (_Component) {
 exports.default = (0, _reactRouter.withRouter)(ActorThumbnail);
 
 /***/ }),
-/* 842 */
+/* 844 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59006,7 +59505,7 @@ var FilmSidebar = function FilmSidebar(_ref) {
 exports.default = FilmSidebar;
 
 /***/ }),
-/* 843 */
+/* 845 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59022,7 +59521,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactSlick = __webpack_require__(844);
+var _reactSlick = __webpack_require__(846);
 
 var _reactSlick2 = _interopRequireDefault(_reactSlick);
 
@@ -59092,7 +59591,7 @@ var SliderCarousel = function (_Component) {
 exports.default = (0, _reactRouter.withRouter)(SliderCarousel);
 
 /***/ }),
-/* 844 */
+/* 846 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59100,7 +59599,7 @@ exports.default = (0, _reactRouter.withRouter)(SliderCarousel);
 
 exports.__esModule = true;
 
-var _slider = __webpack_require__(845);
+var _slider = __webpack_require__(847);
 
 var _slider2 = _interopRequireDefault(_slider);
 
@@ -59109,7 +59608,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _slider2.default;
 
 /***/ }),
-/* 845 */
+/* 847 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59123,13 +59622,13 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _innerSlider = __webpack_require__(846);
+var _innerSlider = __webpack_require__(848);
 
-var _json2mq = __webpack_require__(853);
+var _json2mq = __webpack_require__(855);
 
 var _json2mq2 = _interopRequireDefault(_json2mq);
 
-var _defaultProps = __webpack_require__(855);
+var _defaultProps = __webpack_require__(857);
 
 var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
@@ -59143,7 +59642,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var enquire = (0, _innerSliderUtils.canUseDOM)() && __webpack_require__(856);
+var enquire = (0, _innerSliderUtils.canUseDOM)() && __webpack_require__(858);
 
 var Slider = function (_React$Component) {
   _inherits(Slider, _React$Component);
@@ -59359,7 +59858,7 @@ exports.default = Slider;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 846 */
+/* 848 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59380,11 +59879,11 @@ var _reactDom = __webpack_require__(117);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _initialState = __webpack_require__(847);
+var _initialState = __webpack_require__(849);
 
 var _initialState2 = _interopRequireDefault(_initialState);
 
-var _lodash = __webpack_require__(848);
+var _lodash = __webpack_require__(850);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -59394,13 +59893,13 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _innerSliderUtils = __webpack_require__(140);
 
-var _track = __webpack_require__(849);
+var _track = __webpack_require__(851);
 
-var _dots = __webpack_require__(850);
+var _dots = __webpack_require__(852);
 
-var _arrows = __webpack_require__(851);
+var _arrows = __webpack_require__(853);
 
-var _resizeObserverPolyfill = __webpack_require__(852);
+var _resizeObserverPolyfill = __webpack_require__(854);
 
 var _resizeObserverPolyfill2 = _interopRequireDefault(_resizeObserverPolyfill);
 
@@ -60104,7 +60603,7 @@ var InnerSlider = exports.InnerSlider = function (_React$Component) {
 }(_react2.default.Component);
 
 /***/ }),
-/* 847 */
+/* 849 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60139,7 +60638,7 @@ var initialState = {
 exports.default = initialState;
 
 /***/ }),
-/* 848 */
+/* 850 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -60523,7 +61022,7 @@ module.exports = debounce;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(74)))
 
 /***/ }),
-/* 849 */
+/* 851 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60738,7 +61237,7 @@ var Track = exports.Track = function (_React$PureComponent) {
 }(_react2.default.PureComponent);
 
 /***/ }),
-/* 850 */
+/* 852 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60843,7 +61342,7 @@ var Dots = exports.Dots = function (_React$PureComponent) {
 }(_react2.default.PureComponent);
 
 /***/ }),
-/* 851 */
+/* 853 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60983,7 +61482,7 @@ var NextArrow = exports.NextArrow = function (_React$PureComponent2) {
 }(_react2.default.PureComponent);
 
 /***/ }),
-/* 852 */
+/* 854 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62016,10 +62515,10 @@ var index = (function () {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(74)))
 
 /***/ }),
-/* 853 */
+/* 855 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var camel2hyphen = __webpack_require__(854);
+var camel2hyphen = __webpack_require__(856);
 
 var isDimension = function (feature) {
   var re = /[height|width]$/;
@@ -62072,7 +62571,7 @@ var json2mq = function (query) {
 module.exports = json2mq;
 
 /***/ }),
-/* 854 */
+/* 856 */
 /***/ (function(module, exports) {
 
 var camel2hyphen = function (str) {
@@ -62086,7 +62585,7 @@ var camel2hyphen = function (str) {
 module.exports = camel2hyphen;
 
 /***/ }),
-/* 855 */
+/* 857 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62168,18 +62667,18 @@ var defaultProps = {
 exports.default = defaultProps;
 
 /***/ }),
-/* 856 */
+/* 858 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var MediaQueryDispatch = __webpack_require__(857);
+var MediaQueryDispatch = __webpack_require__(859);
 module.exports = new MediaQueryDispatch();
 
 
 /***/ }),
-/* 857 */
+/* 859 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var MediaQuery = __webpack_require__(858);
+var MediaQuery = __webpack_require__(860);
 var Util = __webpack_require__(327);
 var each = Util.each;
 var isFunction = Util.isFunction;
@@ -62267,10 +62766,10 @@ module.exports = MediaQueryDispatch;
 
 
 /***/ }),
-/* 858 */
+/* 860 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var QueryHandler = __webpack_require__(859);
+var QueryHandler = __webpack_require__(861);
 var each = __webpack_require__(327).each;
 
 /**
@@ -62366,7 +62865,7 @@ module.exports = MediaQuery;
 
 
 /***/ }),
-/* 859 */
+/* 861 */
 /***/ (function(module, exports) {
 
 /**
@@ -62446,7 +62945,7 @@ module.exports = QueryHandler;
 
 
 /***/ }),
-/* 860 */
+/* 862 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62482,11 +62981,11 @@ var _ControllPanel = __webpack_require__(138);
 
 var _ControllPanel2 = _interopRequireDefault(_ControllPanel);
 
-var _PersonPageSidebar = __webpack_require__(861);
+var _PersonPageSidebar = __webpack_require__(863);
 
 var _PersonPageSidebar2 = _interopRequireDefault(_PersonPageSidebar);
 
-var _ThumbnailsList = __webpack_require__(862);
+var _ThumbnailsList = __webpack_require__(864);
 
 var _ThumbnailsList2 = _interopRequireDefault(_ThumbnailsList);
 
@@ -62615,7 +63114,7 @@ var mapDispatchToProps = {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ActorDetails);
 
 /***/ }),
-/* 861 */
+/* 863 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62724,7 +63223,7 @@ var PersonPageSidebar = function PersonPageSidebar(_ref) {
 exports.default = PersonPageSidebar;
 
 /***/ }),
-/* 862 */
+/* 864 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62740,7 +63239,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _FilmThumbnail = __webpack_require__(863);
+var _FilmThumbnail = __webpack_require__(865);
 
 var _FilmThumbnail2 = _interopRequireDefault(_FilmThumbnail);
 
@@ -62828,7 +63327,7 @@ var ThumbnailsList = function (_Component) {
 exports.default = ThumbnailsList;
 
 /***/ }),
-/* 863 */
+/* 865 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62899,7 +63398,7 @@ var FilmThumbnail = function (_Component) {
 exports.default = (0, _reactRouter.withRouter)(FilmThumbnail);
 
 /***/ }),
-/* 864 */
+/* 866 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62925,7 +63424,7 @@ var _Pagination = __webpack_require__(325);
 
 var _Pagination2 = _interopRequireDefault(_Pagination);
 
-var _PersonPreview = __webpack_require__(865);
+var _PersonPreview = __webpack_require__(867);
 
 var _PersonPreview2 = _interopRequireDefault(_PersonPreview);
 
@@ -63031,7 +63530,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(PersonsList);
 
 /***/ }),
-/* 865 */
+/* 867 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

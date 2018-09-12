@@ -13,7 +13,8 @@ export const getStringOfFields = (field, list) => {
 };
 
 export const splitStringBy = ( string, separator, connector ) => {
-    return string.split(separator).join(connector)
+    let regExp = new RegExp(separator, 'g');
+    return string.replace( regExp, connector )
 }
 
 export const firstCharToUpperCase = ( string ) => {

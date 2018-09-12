@@ -12,7 +12,7 @@ import {Router, Route, Redirect, browserHistory} from 'react-router';
 import reducers from 'redux-store/reducers/index.js';
 import Layout from 'components/Layout';
 import MoviesList from 'containers/MoviesList';
-import FilmDetails from 'containers/FilmDetails';
+import MoviePage from 'containers/MoviePage';
 import ActorDetails from 'containers/ActorDetails';
 import PersonsList from 'containers/PersonsList';
 
@@ -28,7 +28,7 @@ ReactDOM.render(
             <Route component={Layout}>
                 <Redirect from='/' to='/movies/movie/top_rated' query={{'page' : 1}}/>
                 <Route path='/movies/:type/:page' component={MoviesList}/>
-                <Route path='/movie' component={FilmDetails}/>
+                <Route path='/movie' component={MoviePage}/>
                 <Route path='/person/:id' component={ActorDetails}/>
                 <Route path='/persons' component={PersonsList}/>
             </Route>

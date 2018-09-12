@@ -1,12 +1,11 @@
 
 .film-page{
     &__header{
-        @include font(16px, #fff, 700);
+        font-weight: 700;
         height: 100%;
         position: relative;
         overflow: hidden;
         &-wrapper{
-            background: rgba(50, 100, 150, .8);
             padding: 20px 0;
         }
         &-content{
@@ -26,9 +25,9 @@
         }
     }
     &__title{
-        @include font(40px, #fff, 700);
+        font-size: 40px;
         span{
-            @include font(30px, $font-col4);
+            font-size: 30px;
         }
     }
     &__overview{
