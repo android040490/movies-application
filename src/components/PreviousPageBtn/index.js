@@ -15,7 +15,7 @@ class PreviousPageBtn extends Component {
     render() {
         return (
             <div>
-                <button className="nav-btn" onClick={this.handleClick}> &lt; Go to the previous page</button>
+                <button className="nav-btn" onClick={this.handleClick}> &lt; BACK</button>
             </div>
         );
     }

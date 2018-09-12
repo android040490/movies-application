@@ -15219,7 +15219,7 @@ var PreviousPageBtn = function (_Component) {
                 _react2.default.createElement(
                     'button',
                     { className: 'nav-btn', onClick: this.handleClick },
-                    ' < Go to the previous page'
+                    ' < BACK'
                 )
             );
         }
