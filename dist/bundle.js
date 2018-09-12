@@ -20678,8 +20678,8 @@ _reactDom2.default.render(_react2.default.createElement(
         { history: history },
         _react2.default.createElement(
             _reactRouter.Route,
-            { component: _Layout2.default },
-            _react2.default.createElement(_reactRouter.Redirect, { from: '/', to: '/movies/movie/top_rated', query: { 'page': 1 } }),
+            { path: '/', component: _Layout2.default },
+            _react2.default.createElement(_reactRouter.IndexRedirect, { to: '/movies/movie/top_rated', query: { 'page': 1 } }),
             _react2.default.createElement(_reactRouter.Route, { path: '/movies/:type/:page', component: _MoviesList2.default }),
             _react2.default.createElement(_reactRouter.Route, { path: '/movie', component: _MoviePage2.default }),
             _react2.default.createElement(_reactRouter.Route, { path: '/person/:id', component: _ActorDetails2.default }),
