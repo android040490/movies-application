@@ -41,7 +41,7 @@ class FilmInfo extends Component {
                         <div style={{backgroundColor : bg}} className="film-page__header-wrapper">
                             <div className="film-page__header-content wrapper">
                                 <div className="film-page__header-img">
-                                    <img ref={this.posterRef} onLoad={this.getColor} src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${film.poster_path}`} alt={`${film.title}`} />
+                                    <img ref={this.posterRef} onLoad={this.getColor} crossOrigin='anonymous' src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${film.poster_path}`} alt={`${film.title}`} />
                                 </div>
                                 <div className="film-page__header-description">
                                     <div>
