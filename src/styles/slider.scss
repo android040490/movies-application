@@ -8,6 +8,8 @@
     &__item-img{
         position: relative;
         border: 2px solid #fff;
+        display: flex;
+        justify-content: center;
     }
     &__item-title{
         text-align: center;

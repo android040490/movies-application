@@ -35,6 +35,12 @@
     }
     &__content{
         display: flex;
+        flex-direction: row;
+        padding-top: 20px;
+        @media (max-width : 700px) {
+            flex-direction: column-reverse;
+
+        }
         &-section{
             &-title{
                 padding: 15px 0 15px 15px;
@@ -42,6 +48,7 @@
             }
         }
     }
+    
     &__sidebar{
         flex-basis: 200px;
         flex-shrink: 0;
