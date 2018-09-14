@@ -335,7 +335,6 @@ a {
 
 * {
   box-sizing: border-box;
-  min-height: 0;
   min-width: 0; }
 
 .wrapper {
@@ -451,7 +450,7 @@ body {
   position: relative;
   overflow: hidden; }
   .film-page__header-wrapper {
-    padding: 20px 0; }
+    padding: 20px; }
   .film-page__header-content {
     display: flex;
     flex-wrap: wrap; }
@@ -472,7 +471,12 @@ body {
   padding-top: 30px; }
 
 .film-page__content {
-  display: flex; }
+  display: flex;
+  flex-direction: row;
+  padding-top: 20px; }
+  @media (max-width: 700px) {
+    .film-page__content {
+      flex-direction: column-reverse; } }
   .film-page__content-section-title {
     padding: 15px 0 15px 15px;
     font-family: Proxima Nova, sans-serif;
@@ -518,15 +522,19 @@ body {
 
 .person-page__header {
   background: linear-gradient(to top, #2F4F4F, #3e72c0 60%);
-  padding: 20px;
-  margin-bottom: 20px; }
+  padding: 20px; }
 
 .person-page__content {
+  padding-top: 20px;
   display: flex; }
+  @media (max-width: 700px) {
+    .person-page__content {
+      flex-direction: column; } }
 
 .person-page__sidebar {
-  flex-basis: 300px;
-  flex-shrink: 0; }
+  min-width: 300px;
+  flex-shrink: 1;
+  padding-bottom: 20px; }
 
 .person-page__main-content {
   padding-left: 10px; }
@@ -858,7 +866,9 @@ body {
     cursor: pointer; }
   .carousel__item-img {
     position: relative;
-    border: 2px solid #fff; }
+    border: 2px solid #fff;
+    display: flex;
+    justify-content: center; }
   .carousel__item-title {
     text-align: center;
     font-family: Proxima Nova, sans-serif;
