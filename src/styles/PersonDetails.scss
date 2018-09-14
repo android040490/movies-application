@@ -2,14 +2,19 @@
     &__header{
         background: linear-gradient(to top, $bg-header, $bg-header2 60%) ;
         padding: 20px;
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
     }
     &__content{
+        padding-top: 20px;
         display: flex;
+        @media ( max-width: 700px){
+            flex-direction: column;
+        }
     }
     &__sidebar{
-        flex-basis: 300px;
-        flex-shrink: 0;  
+        min-width: 300px;
+        flex-shrink: 1;  
+        padding-bottom: 20px;
     }
     &__main-content{
         padding-left: 10px;
